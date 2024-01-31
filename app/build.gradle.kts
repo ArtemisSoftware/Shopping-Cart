@@ -62,6 +62,7 @@ dependencies {
     implementation(libs.material3)
 
     implementation(libs.converter.moshi)
+    implementation(libs.coil.compose)
 
     testImplementation(libs.junit)
 
