@@ -17,9 +17,6 @@
       <entry key="deleteShoppingItem()">
         <State />
       </entry>
-      <entry key="insertShoppingItem()">
-        <State />
-      </entry>
     </value>
   </component>
 </project>
