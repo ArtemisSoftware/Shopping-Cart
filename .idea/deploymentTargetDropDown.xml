@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="deploymentTargetDropDown">
+    <value>
+      <entry key="Add shopping item()">
+        <State />
+      </entry>
+      <entry key="Insert items and check total price sum()">
+        <State />
+      </entry>
+      <entry key="ShoppingDaoTest">
+        <State />
+      </entry>
+      <entry key="app">
+        <State />
+      </entry>
+      <entry key="deleteShoppingItem()">
+        <State />
+      </entry>
+      <entry key="insertShoppingItem()">
+        <State />
+      </entry>
+    </value>
+  </component>
+</project>

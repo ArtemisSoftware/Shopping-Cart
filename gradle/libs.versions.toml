@@ -13,12 +13,18 @@ retrofit = "2.9.0"
 coil-compose = "2.4.0"
 room = "2.4.3"
 com-google-devtools-ksp = "1.8.20-1.0.11"
+turbine = "1.0.0"
+
+# test
+
+junit-jupiter = "5.9.3"
+assertk = "0.26.1"
+de-mannodermaus-android-junit5 = "1.9.3.0"
+core-testing = "2.1.0"
 
 [libraries]
 core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core-ktx" }
-junit = { group = "junit", name = "junit", version.ref = "junit" }
-androidx-test-ext-junit = { group = "androidx.test.ext", name = "junit", version.ref = "androidx-test-ext-junit" }
-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espresso-core" }
+
 lifecycle-runtime-ktx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "lifecycle-runtime-ktx" }
 activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activity-compose" }
 compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "compose-bom" }
@@ -44,11 +50,30 @@ room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "
 room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room"  }
 room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room"  }
 
+# test
+
+junit = { group = "junit", name = "junit", version.ref = "junit" }
+androidx-test-ext-junit = { group = "androidx.test.ext", name = "junit", version.ref = "androidx-test-ext-junit" }
+espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espresso-core" }
+
+junit-jupiter-api = { group = "org.junit.jupiter", name = "junit-jupiter-api", version.ref = "junit-jupiter" }
+junit-jupiter-engine = { group = "org.junit.jupiter", name = "junit-jupiter-engine", version.ref = "junit-jupiter" }
+junit-jupiter-params = { group = "org.junit.jupiter", name = "junit-jupiter-params", version.ref = "junit-jupiter" }
+
+assertk = { group = "com.willowtreeapps.assertk", name = "assertk", version.ref = "assertk" }
+
+turbine = { group = "app.cash.turbine", name = "turbine", version.ref = "turbine" }
+core-testing = { group = "androidx.arch.core", name = "core-testing", version.ref = "core-testing" }
+
+
 [plugins]
 com-android-application = { id = "com.android.application", version.ref = "agp" }
 org-jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "org-jetbrains-kotlin-android" }
-
 com-google-devtools-ksp = { id = "com.google.devtools.ksp", version.ref = "com-google-devtools-ksp" }
+
+# test
+
+de-mannodermaus-android-junit5 = { id = "de.mannodermaus.android-junit5", version.ref = "de-mannodermaus-android-junit5" }
 
 [bundles]
 
