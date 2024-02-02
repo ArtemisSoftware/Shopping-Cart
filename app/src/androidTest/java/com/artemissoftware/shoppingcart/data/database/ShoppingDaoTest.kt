@@ -90,6 +90,7 @@ internal class ShoppingDaoTest {
             val total = awaitItem()
             assertThat(total)
                 .isEqualTo(TestShoppingItemData.shoppingItemList.map { it.price * it.amount }.sum())
+            cancel()
         }
     }
 }
