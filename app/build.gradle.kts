@@ -63,6 +63,7 @@ dependencies {
     implementation(libs.ui.graphics)
     implementation(libs.ui.tooling.preview)
     implementation(libs.material3)
+    implementation(libs.navigation.compose)
 
     implementation(libs.converter.moshi)
     implementation(libs.coil.compose)
@@ -74,6 +75,7 @@ dependencies {
 
     implementation(libs.hilt.android)
     ksp(libs.hilt.android.compiler)
+    implementation(libs.hilt.navigation.compose)
 
     testImplementation(libs.junit)
     testImplementation(libs.junit.jupiter.api)
