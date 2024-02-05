@@ -25,6 +25,8 @@ junit-jupiter = "5.9.3"
 assertk = "0.26.1"
 de-mannodermaus-android-junit5 = "1.9.3.0"
 core-testing = "2.1.0"
+kotlinx-coroutines-test = "1.7.1"
+mockk = "1.12.5"
 
 [libraries]
 core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core-ktx" }
@@ -77,6 +79,8 @@ assertk = { group = "com.willowtreeapps.assertk", name = "assertk", version.ref 
 
 turbine = { group = "app.cash.turbine", name = "turbine", version.ref = "turbine" }
 core-testing = { group = "androidx.arch.core", name = "core-testing", version.ref = "core-testing" }
+kotlinx-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "kotlinx-coroutines-test" }
+mockk = { group = "io.mockk", name = "mockk", version.ref = "mockk" }
 
 
 [plugins]
