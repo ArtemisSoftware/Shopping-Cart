@@ -26,7 +26,7 @@ assertk = "0.26.1"
 de-mannodermaus-android-junit5 = "1.9.3.0"
 core-testing = "2.1.0"
 kotlinx-coroutines-test = "1.7.1"
-mockk = "1.12.5"
+mockk = "1.13.2"
 
 [libraries]
 core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core-ktx" }
