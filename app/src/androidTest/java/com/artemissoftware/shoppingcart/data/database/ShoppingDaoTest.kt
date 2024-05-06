@@ -1,9 +1,6 @@
 package com.artemissoftware.shoppingcart.data.database
 
-import android.content.Context
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import androidx.room.Room
-import androidx.test.core.app.ApplicationProvider
 import app.cash.turbine.test
 import assertk.all
 import assertk.assertThat
@@ -11,39 +8,35 @@ import assertk.assertions.doesNotContain
 import assertk.assertions.hasSize
 import assertk.assertions.isEqualTo
 import com.artemissoftware.shoppingcart.TestShoppingItemData
+import dagger.hilt.android.testing.HiltAndroidRule
+import dagger.hilt.android.testing.HiltAndroidTest
 import kotlinx.coroutines.test.runTest
+import org.junit.After
+import org.junit.Before
 import org.junit.Rule
-import org.junit.jupiter.api.AfterEach
-import org.junit.jupiter.api.BeforeEach
-import org.junit.jupiter.api.Test
+import org.junit.Test
+import javax.inject.Inject
 
+@HiltAndroidTest
 internal class ShoppingDaoTest {
 
-//    @get:Rule
-//    var hiltRule = HiltAndroidRule(this)
+    @get:Rule
+    var hiltRule = HiltAndroidRule(this)
 
     @get:Rule
     var instantTaskExecutorRule = InstantTaskExecutorRule()
 
-//    @Inject
-//    @Named("test_db")
+    @Inject
     lateinit var database: ShoppingCartDatabase
     private lateinit var shoppingDao: ShoppingDao
 
-    @BeforeEach
+    @Before
     fun setUp() {
-//        hiltRule.inject()
-
-        val context = ApplicationProvider.getApplicationContext<Context>()
-        database = Room
-            .inMemoryDatabaseBuilder(context, ShoppingCartDatabase::class.java)
-            .allowMainThreadQueries()
-            .build()
-
+        hiltRule.inject()
         shoppingDao = database.shoppingDao()
     }
 
-    @AfterEach
+    @After
     fun tearDown() {
         database.close()
     }

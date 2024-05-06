@@ -18,7 +18,7 @@ android {
         versionCode = 1
         versionName = "1.0"
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = "com.artemissoftware.shoppingcart.HiltTestRunner"
         vectorDrawables {
             useSupportLibrary = true
         }
@@ -65,6 +65,8 @@ dependencies {
     implementation(libs.material3)
     implementation(libs.navigation.compose)
 
+    implementation(libs.gson)
+
     implementation(libs.converter.moshi)
     implementation(libs.coil.compose)
 
@@ -94,6 +96,8 @@ dependencies {
     androidTestImplementation(libs.turbine)
     androidTestImplementation(libs.core.testing)
     androidTestImplementation(libs.assertk)
+    androidTestImplementation(libs.hilt.android.testing)
+    kspAndroidTest(libs.hilt.android.compiler)
 
     debugImplementation(libs.ui.tooling)
     debugImplementation(libs.ui.test.manifest)

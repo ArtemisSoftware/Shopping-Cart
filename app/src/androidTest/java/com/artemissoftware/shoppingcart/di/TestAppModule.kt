@@ -5,29 +5,21 @@ import androidx.room.Room
 import com.artemissoftware.shoppingcart.data.database.ShoppingCartDatabase
 import dagger.Module
 import dagger.Provides
-import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import dagger.hilt.testing.TestInstallIn
 import javax.inject.Named
 import javax.inject.Singleton
 
 @Module
-@InstallIn(SingletonComponent::class)
-object DataBaseModule {
+@TestInstallIn(components = [SingletonComponent::class], replaces = [DataBaseModule::class])
+object TestAppModule {
 
-    @Singleton
     @Provides
-    fun provideShoppingCartDataBase(
-        @ApplicationContext context: Context,
-    ): ShoppingCartDatabase {
-        return Room
-            .databaseBuilder(
-                context,
-                ShoppingCartDatabase::class.java,
-                "shopping_db",
-            )
+    fun provideInMemoryDb(@ApplicationContext context: Context): ShoppingCartDatabase =
+        Room.inMemoryDatabaseBuilder(context, ShoppingCartDatabase::class.java)
+            .allowMainThreadQueries()
             .build()
-    }
 
 //    @Singleton
 //    @Provides

@@ -22,7 +22,7 @@ internal class ShoppingCartRepositoryImplTest {
     }
 
     @Test
-    fun `Inset item, check dao is called`() = runBlocking {
+    fun `Insert item, check dao is called`() = runBlocking {
         coEvery { shoppingDao.insertShoppingItem(shoppingItemEntity) } returns Unit
 
         repository.insertShoppingItem(shoppingItem)

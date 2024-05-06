@@ -5,4 +5,5 @@ data class AddItemState(
     val amount: String = "",
     val price: String = "",
     val imageUrl: String = "",
+    val error: String = "",
 )
