@@ -1,6 +1,7 @@
 package com.artemissoftware.shoppingcart.presentation.additem.composables
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -9,6 +10,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -25,35 +27,48 @@ internal fun ProductDescription(
 ) {
     Column(
         modifier = modifier,
+        verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
 
-        Text(
-            text = "Aristocratic Hand Bag",
-            fontSize = 20.sp,
+        Column(
             modifier = Modifier
-                .padding(top = 16.dp, start = 16.dp, end = 16.dp, bottom = 8.dp)
-        )
+                .fillMaxWidth(),
+            verticalArrangement = Arrangement.spacedBy(8.dp)
+        ) {
+            Text(
+                text = "Aristocratic Hand Bag",
+                fontSize = 20.sp,
+                color = Color.White,
+                modifier = Modifier.fillMaxWidth()
+            )
 
-        Text(
-            text = product.title,
-            fontSize = 30.sp,
-            modifier = Modifier
-                .padding(start = 16.dp)
-        )
+            Text(
+                text = product.title,
+                fontSize = 30.sp,
+                color = Color.White,
+                modifier = Modifier.fillMaxWidth()
+            )
+        }
 
-        Text(
-            text = "Price",
-            fontSize = 20.sp,
+        Column(
             modifier = Modifier
-                .padding(start = 16.dp)
-        )
+                .fillMaxWidth(),
+            verticalArrangement = Arrangement.spacedBy(8.dp)
+        ) {
+            Text(
+                text = "Price",
+                fontSize = 20.sp,
+                color = Color.White,
+                modifier = Modifier.fillMaxWidth()
+            )
 
-        Text(
-            text = product.price,
-            fontSize = 30.sp,
-            modifier = Modifier
-                .padding(start = 16.dp, bottom = 8.dp, top = 8.dp)
-        )
+            Text(
+                text = product.price,
+                fontSize = 30.sp,
+                color = Color.White,
+                modifier = Modifier.fillMaxWidth()
+            )
+        }
     }
 }
 
