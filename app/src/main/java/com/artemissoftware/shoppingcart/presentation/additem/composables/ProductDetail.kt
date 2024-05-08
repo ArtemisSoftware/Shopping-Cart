@@ -91,6 +91,7 @@ internal fun ProductDetail(
             Text(
                 text = stringResource(id = R.string.buy_now),
                 style = MaterialTheme.typography.bodyLarge,
+                fontSize = 30.sp,
                 fontWeight = FontWeight.Bold,
                 color = Color.White
             )
