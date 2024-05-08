@@ -31,8 +31,7 @@ fun ProductCard(
     modifier: Modifier = Modifier,
 ) {
     Card(
-        modifier = modifier
-            .background(Color.White),
+        modifier = modifier,
         shape = RoundedCornerShape(12.dp),
         elevation = CardDefaults.cardElevation(defaultElevation = 8.dp)
     ) {
