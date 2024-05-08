@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">ShoppingCart</string>
+    <string name="total_cost">"Total cost: "</string>
+    <string name="qty">"Qty: "</string>
 </resources>
