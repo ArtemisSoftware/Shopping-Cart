@@ -62,6 +62,7 @@ dependencies {
     implementation(libs.material3)
 
     implementation(libs.material.icons.extended)
+    implementation(libs.constraintlayout.compose)
 
     testImplementation(libs.junit)
 
