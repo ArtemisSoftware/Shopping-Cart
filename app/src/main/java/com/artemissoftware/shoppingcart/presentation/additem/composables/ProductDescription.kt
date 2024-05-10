@@ -63,7 +63,7 @@ internal fun ProductDescription(
             )
 
             Text(
-                text = product.price,
+                text = product.price.toString(),
                 fontSize = 30.sp,
                 color = Color.White,
                 modifier = Modifier.fillMaxWidth()

@@ -23,11 +23,14 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.artemissoftware.shoppingcart.PreviewData
 import com.artemissoftware.shoppingcart.R
+import com.artemissoftware.shoppingcart.domain.models.Product
 import com.artemissoftware.shoppingcart.ui.theme.ShoppingCartTheme
 
 @Composable
-fun ProductCard(
+internal fun ProductCard(
+    product: Product,
     modifier: Modifier = Modifier,
 ) {
     Card(
@@ -57,7 +60,7 @@ fun ProductCard(
             ) {
                 Text(
                     fontWeight = FontWeight.Bold,
-                    text = "Name",
+                    text = product.title,
                 )
 
                 Row(
@@ -67,7 +70,7 @@ fun ProductCard(
                 ) {
                     Text(
                         fontWeight = FontWeight.Bold,
-                        text = "total price",
+                        text = product.totalPrice().toString(),
                     )
 
                     Row(
@@ -80,7 +83,7 @@ fun ProductCard(
                         )
                         Text(
                             fontWeight = FontWeight.Bold,
-                            text = "2",
+                            text = product.quantity.toString(),
                         )
                     }
                 }
@@ -94,6 +97,7 @@ fun ProductCard(
 private fun ProductCardPreview() {
     ShoppingCartTheme {
         ProductCard(
+            product = PreviewData.product,
             modifier = Modifier.fillMaxWidth()
         )
     }
