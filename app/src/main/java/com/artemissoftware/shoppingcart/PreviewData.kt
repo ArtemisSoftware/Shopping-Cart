@@ -20,5 +20,5 @@ object PreviewData {
 
     val cartState = CartState(products = listOf(product, product))
     val addProductState = AddProductState(product = product)
-    val searchProductState = SearchProductState(products = listOf(product, product))
+    val searchProductState = SearchProductState(products = listOf(product, product),  searchQuery = "query")
 }

@@ -14,6 +14,8 @@ import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBackIosNew
+import androidx.compose.material.icons.filled.PlayArrow
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -41,6 +43,7 @@ fun SearchProductScreen(
 ) {
     SearchProductScreenContent(
         state = PreviewData.searchProductState,
+        event = {},
         onPopBackStack = onPopBackStack
     )
 }
@@ -49,6 +52,7 @@ fun SearchProductScreen(
 @Composable
 private fun SearchProductScreenContent(
     state: SearchProductState,
+    event: (SearchProductEvent) -> Unit,
     onPopBackStack: () -> Unit,
 ) {
     Scaffold(
@@ -82,9 +86,26 @@ private fun SearchProductScreenContent(
         ) {
 
             SearchBar(
-                query = "searchText",
-                onQueryChange = {}, //update the value of searchText
-                onSearch = {}, //the callback to be invoked when the input service triggers the ImeAction.Search action
+                query = state.searchQuery,
+                onQueryChange = { event(SearchProductEvent.UpdateQuery(it)) }, //update the value of searchText
+                trailingIcon = {
+                    IconButton(
+                        onClick = {
+                            event(SearchProductEvent.Search)
+                        }
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.Search,
+                            contentDescription = "",
+                            modifier = Modifier
+                                .size(25.dp),
+                            tint = Color.Black
+                        )
+                    }
+                },
+                onSearch = {
+
+                }, //the callback to be invoked when the input service triggers the ImeAction.Search action
                 active = false, //whether the user is searching or not
                 onActiveChange = {  }, //the callback to be invoked when this search bar's active state is changed
                 modifier = Modifier
@@ -132,6 +153,7 @@ private fun SearchProductScreenContentPreview() {
     ShoppingCartTheme {
         SearchProductScreenContent(
             state = PreviewData.searchProductState,
+            event = {},
             onPopBackStack = {}
         )
     }
