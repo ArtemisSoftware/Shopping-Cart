@@ -29,12 +29,12 @@ import com.artemissoftware.shoppingcart.ui.theme.ShoppingCartTheme
 
 @Composable
 fun CartScreen(
-    navigateToAddProduct: () -> Unit,
+    navigateToSearchProduct: () -> Unit,
 ) {
 
     CartScreenContent(
         state = PreviewData.cartState,
-        navigateToAddProduct = navigateToAddProduct
+        navigateToSearchProduct = navigateToSearchProduct,
     )
 }
 
@@ -42,7 +42,7 @@ fun CartScreen(
 @Composable
 private fun CartScreenContent(
     state: CartState,
-    navigateToAddProduct: () -> Unit,
+    navigateToSearchProduct: () -> Unit,
 ) {
 
     Scaffold(
@@ -53,7 +53,7 @@ private fun CartScreenContent(
         floatingActionButton = {
             Box {
                 FloatingActionButton(
-                    onClick = navigateToAddProduct,
+                    onClick = navigateToSearchProduct,
                     shape = CircleShape,
                     modifier = Modifier
                         .align(Alignment.Center)
@@ -92,7 +92,7 @@ private fun CartScreenContentPreview() {
     ShoppingCartTheme {
         CartScreenContent(
             state = PreviewData.cartState,
-            navigateToAddProduct = {},
+            navigateToSearchProduct = {},
         )
     }
 }

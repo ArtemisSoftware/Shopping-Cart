@@ -1,6 +1,7 @@
 package com.artemissoftware.shoppingcart
 
 import com.artemissoftware.shoppingcart.domain.models.Product
+import com.artemissoftware.shoppingcart.presentation.additem.AddProductState
 import com.artemissoftware.shoppingcart.presentation.cart.CartState
 
 object PreviewData {
@@ -17,4 +18,5 @@ object PreviewData {
             R.drawable.office_code)
 
     val cartState = CartState(products = listOf(product, product))
+    val addProductState = AddProductState(product = product)
 }

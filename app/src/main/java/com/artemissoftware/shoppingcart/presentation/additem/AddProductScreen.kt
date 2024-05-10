@@ -17,13 +17,16 @@ import androidx.compose.material.icons.filled.ArrowBackIosNew
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.material3.TopAppBarDefaults.topAppBarColors
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -31,12 +34,16 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.ConstraintSet
 import com.artemissoftware.shoppingcart.PreviewData
 import com.artemissoftware.shoppingcart.PreviewData.product
+import com.artemissoftware.shoppingcart.R
 import com.artemissoftware.shoppingcart.presentation.additem.composables.ProductDescription
 import com.artemissoftware.shoppingcart.presentation.additem.composables.ProductDetail
 import com.artemissoftware.shoppingcart.ui.theme.PrimaryColor
@@ -45,28 +52,29 @@ import com.artemissoftware.shoppingcart.ui.theme.ShoppingCartTheme
 @Composable
 fun AddProductScreen(
     onPopBackStack: () -> Unit,
+    navigateToSearchItem: () -> Unit,
 ) {
     AddProductScreenContent(
+        state = PreviewData.addProductState,
         onPopBackStack = onPopBackStack,
+        navigateToSearchItem = navigateToSearchItem
     )
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun AddProductScreenContent(
+    state: AddProductState,
     onPopBackStack: () -> Unit,
+    navigateToSearchItem: () -> Unit,
 ) {
     Scaffold(
         topBar = {
             TopAppBar(
                 title = {},
-                colors = TopAppBarDefaults.smallTopAppBarColors(
-                    containerColor = PrimaryColor
-                ),
+                colors = topAppBarColors(containerColor = PrimaryColor),
                 navigationIcon = {
-                    IconButton(
-                        onClick = onPopBackStack
-                    ) {
+                    IconButton(onClick = onPopBackStack) {
                         Icon(
                             imageVector = Icons.Default.ArrowBackIosNew,
                             contentDescription = "Back Arrow",
@@ -77,7 +85,7 @@ private fun AddProductScreenContent(
                     }
                 },
                 actions = {
-                    IconButton(onClick = { /*TODO*/ }) {
+                    IconButton(onClick = navigateToSearchItem) {
                         Icon(
                             imageVector = Icons.Default.Search,
                             contentDescription = "Search Icon",
@@ -89,72 +97,87 @@ private fun AddProductScreenContent(
                 }
             )
         }
-    ) {
-
-        ConstraintLayout(
-            modifier = Modifier
-                .fillMaxWidth()
-                .background(color = PrimaryColor)
-                .padding(it)
-        ) {
-            val (productDescription, productDetail, productImage,  xxx) = createRefs()
-
-            ProductDescription(
+    ) { paddingValues ->
+        state.product?.let {
+            ConstraintLayout(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .fillMaxHeight(0.3F)
-                    .padding(all = 16.dp)
-                    .constrainAs(productDescription) {},
-                product = product
-            )
+                    .background(color = PrimaryColor)
+                    .padding(paddingValues)
+            ) {
+                val (productDescription, productDetail, productImage,  xxx) = createRefs()
 
+                ProductDescription(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .fillMaxHeight(0.3F)
+                        .padding(all = 16.dp)
+                        .constrainAs(productDescription) {},
+                    product = product
+                )
+
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .fillMaxHeight(0.7F)
+                        .background(
+                            Color.White,
+                            RoundedCornerShape(topStart = 24.dp, topEnd = 24.dp)
+                        )
+                        .clip(RoundedCornerShape(topStart = 24.dp, topEnd = 24.dp))
+                        .constrainAs(productDetail) {
+                            top.linkTo(productDescription.bottom)
+                            start.linkTo(productDescription.start)
+                        }
+                )
+
+                Image(
+                    painter = painterResource(id = product.img),
+                    contentDescription = "Product Image",
+                    contentScale = ContentScale.Fit,
+                    modifier = Modifier
+                        .size(180.dp)
+                        .constrainAs(productImage) {
+                            top.linkTo(productDescription.bottom)
+                            bottom.linkTo(productDetail.top, 60.dp)
+                            end.linkTo(parent.end, 20.dp)
+                        }
+                )
+
+                ProductDetail(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(16.dp)
+                        .constrainAs(xxx) {
+                            top.linkTo(productImage.bottom)
+                            start.linkTo(productDescription.start)
+                        },
+                    product = product,
+                    onBuyNow = {}
+                )
+            }
+        } ?: run {
             Box(
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .fillMaxHeight(0.7F)
-                    .background(Color.White, RoundedCornerShape(topStart = 24.dp, topEnd = 24.dp))
-                    .clip(RoundedCornerShape(topStart = 24.dp, topEnd = 24.dp))
-                    .constrainAs(productDetail) {
-                        top.linkTo(productDescription.bottom)
-                        start.linkTo(productDescription.start)
-                    }
-            )
-
-            Image(
-                painter = painterResource(id = product.img),
-                contentDescription = "Product Image",
-                contentScale = ContentScale.Fit,
-                modifier = Modifier
-                    .size(180.dp)
-                    .constrainAs(productImage) {
-                        top.linkTo(productDescription.bottom)
-                        bottom.linkTo(productDetail.top, 60.dp)
-                        end.linkTo(parent.end, 20.dp)
-                    }
-            )
-
-            ProductDetail(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(16.dp)
-                    .constrainAs(xxx) {
-                        top.linkTo(productImage.bottom)
-                        start.linkTo(productDescription.start)
-                    },
-                product = product,
-                onBuyNow = {}
-            )
+                    .fillMaxSize()
+                    .padding(paddingValues)
+            ) {
+                CircularProgressIndicator(
+                    modifier = Modifier.align(Alignment.Center)
+                )
+            }
         }
     }
 }
-
 
 @Preview(showBackground = true)
 @Composable
 private fun AddProductScreenPreview() {
     ShoppingCartTheme {
         AddProductScreenContent(
-            onPopBackStack = {}
+            onPopBackStack = {},
+            navigateToSearchItem = {},
+            state = PreviewData.addProductState
         )
     }
 }
