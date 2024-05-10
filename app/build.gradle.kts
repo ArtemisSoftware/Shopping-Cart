@@ -61,6 +61,8 @@ dependencies {
     implementation(libs.ui.tooling.preview)
     implementation(libs.material3)
 
+    implementation(libs.navigation.compose)
+    implementation(libs.gson)
     implementation(libs.material.icons.extended)
     implementation(libs.constraintlayout.compose)
 
