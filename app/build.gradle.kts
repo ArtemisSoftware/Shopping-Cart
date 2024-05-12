@@ -66,7 +66,9 @@ dependencies {
     implementation(libs.material.icons.extended)
     implementation(libs.constraintlayout.compose)
 
+    implementation(libs.retrofit)
     implementation(libs.converter.moshi)
+    implementation(libs.okhttp.logging.interceptor)
 
     testImplementation(libs.junit)
 

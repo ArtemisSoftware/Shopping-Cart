@@ -14,6 +14,7 @@ constraintlayout-compose = "1.0.1"
 navigation-compose = "2.5.0-rc01"
 gson = "2.10"
 retrofit = "2.9.0"
+okhttp = "5.0.0-alpha.11"
 
 [libraries]
 core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core-ktx" }
@@ -41,6 +42,10 @@ gson = { group = "com.google.code.gson", name = "gson", version.ref = "gson" }
 
 retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
 converter-moshi = { group = "com.squareup.retrofit2", name = "converter-moshi", version.ref = "retrofit" }
+
+# okhttp
+
+okhttp-logging-interceptor = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okhttp" }
 
 
 [plugins]
