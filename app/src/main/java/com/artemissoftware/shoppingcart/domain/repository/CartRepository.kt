@@ -1,5 +1,6 @@
-package com.artemissoftware.shoppingcart.domain
+package com.artemissoftware.shoppingcart.domain.repository
 
+import com.artemissoftware.shoppingcart.domain.Resource
 import com.artemissoftware.shoppingcart.domain.models.Product
 import kotlinx.coroutines.flow.Flow
 

@@ -5,7 +5,7 @@ import com.artemissoftware.shoppingcart.data.database.dao.ProductDao
 import com.artemissoftware.shoppingcart.data.mapper.toEntity
 import com.artemissoftware.shoppingcart.data.mapper.toProduct
 import com.artemissoftware.shoppingcart.data.network.source.PixabayApiSource
-import com.artemissoftware.shoppingcart.domain.CartRepository
+import com.artemissoftware.shoppingcart.domain.repository.CartRepository
 import com.artemissoftware.shoppingcart.domain.Resource
 import com.artemissoftware.shoppingcart.domain.models.Product
 import kotlinx.coroutines.flow.Flow
