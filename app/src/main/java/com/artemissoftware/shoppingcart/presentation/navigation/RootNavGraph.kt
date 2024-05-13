@@ -3,9 +3,13 @@ package com.artemissoftware.shoppingcart.presentation.navigation
 import androidx.compose.runtime.Composable
 import androidx.navigation.NamedNavArgument
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.navArgument
+import com.artemissoftware.shoppingcart.presentation.addproduct.AddProductScreen
 import com.artemissoftware.shoppingcart.presentation.cart.CartScreen
+import com.artemissoftware.shoppingcart.presentation.searchproduct.SearchProductScreen
 
 private const val ROOT_GRAPH = "root_graph"
 
@@ -28,6 +32,31 @@ fun RootNavGraph(
             )
         }
 
+        composable(route = Route.Search.getFullRoute()) {
+            SearchProductScreen(
+                onPopBackStack = {
+                    navController.popBackStack()
+                },
+                navigateToAddProduct = {
+
+                }
+            )
+        }
+
+        composable(
+            route = Route.AddProduct.getFullRoute(),
+            arguments = Route.AddProduct.arguments,
+        ) {
+            AddProductScreen(
+                onPopBackStack = {
+                    navController.popBackStack()
+                },
+                navigateToSearchProduct = {
+
+                }
+            )
+        }
+
     }
 }
 
@@ -40,14 +69,17 @@ sealed class Route(
 ) {
     object Cart : Route(route = "cart")
 
-//    data object Image : RandomImageRoute(
-//        route = "random_image",
-//        arguments = listOf(
-//            navArgument(
-//                name = NavArguments.RANDOM_IMAGE,
-//            ) {
-//                type = ImageNavType()
-//            },
-//        ),
-//    )
+    object Search : Route(route = "search")
+
+    object AddProduct : Route(
+        route = "add_product",
+        arguments = listOf(
+            navArgument(
+                name = NavArguments.PRODUCT_ID,
+            ) {
+                nullable = false
+                type = NavType.IntType
+            }
+        )
+    )
 }

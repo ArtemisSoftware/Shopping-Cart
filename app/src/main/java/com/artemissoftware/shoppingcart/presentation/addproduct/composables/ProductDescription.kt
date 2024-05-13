@@ -1,4 +1,4 @@
-package com.artemissoftware.shoppingcart.presentation.additem.composables
+package com.artemissoftware.shoppingcart.presentation.addproduct.composables
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column

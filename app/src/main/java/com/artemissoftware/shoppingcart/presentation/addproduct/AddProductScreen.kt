@@ -38,13 +38,13 @@ import com.artemissoftware.shoppingcart.ui.theme.ShoppingCartTheme
 @Composable
 fun AddProductScreen(
     onPopBackStack: () -> Unit,
-    navigateToSearchItem: () -> Unit,
+    navigateToSearchProduct: () -> Unit,
 ) {
     AddProductScreenContent(
         state = PreviewData.addProductState,
         event = {},
         onPopBackStack = onPopBackStack,
-        navigateToSearchItem = navigateToSearchItem
+        navigateToSearchProduct = navigateToSearchProduct
     )
 }
 
@@ -54,7 +54,7 @@ private fun AddProductScreenContent(
     state: AddProductState,
     event: (AddProductEvent) -> Unit,
     onPopBackStack: () -> Unit,
-    navigateToSearchItem: () -> Unit,
+    navigateToSearchProduct: () -> Unit,
 ) {
     Scaffold(
         topBar = {
@@ -73,7 +73,7 @@ private fun AddProductScreenContent(
                     }
                 },
                 actions = {
-                    IconButton(onClick = navigateToSearchItem) {
+                    IconButton(onClick = navigateToSearchProduct) {
                         Icon(
                             imageVector = Icons.Default.Search,
                             contentDescription = "Search Icon",
@@ -172,7 +172,7 @@ private fun AddProductScreenPreview() {
     ShoppingCartTheme {
         AddProductScreenContent(
             onPopBackStack = {},
-            navigateToSearchItem = {},
+            navigateToSearchProduct = {},
             event = {},
             state = PreviewData.addProductState
         )

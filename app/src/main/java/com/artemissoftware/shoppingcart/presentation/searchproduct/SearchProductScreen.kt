@@ -2,6 +2,7 @@ package com.artemissoftware.shoppingcart.presentation.searchproduct
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
@@ -40,11 +41,13 @@ import com.artemissoftware.shoppingcart.ui.theme.ShoppingCartTheme
 @Composable
 fun SearchProductScreen(
     onPopBackStack: () -> Unit,
+    navigateToAddProduct: (Int) -> Unit,
 ) {
     SearchProductScreenContent(
         state = PreviewData.searchProductState,
         event = {},
-        onPopBackStack = onPopBackStack
+        onPopBackStack = onPopBackStack,
+        navigateToAddProduct = navigateToAddProduct,
     )
 }
 
@@ -54,6 +57,7 @@ private fun SearchProductScreenContent(
     state: SearchProductState,
     event: (SearchProductEvent) -> Unit,
     onPopBackStack: () -> Unit,
+    navigateToAddProduct: (Int) -> Unit,
 ) {
     Scaffold(
         topBar = {
@@ -115,8 +119,6 @@ private fun SearchProductScreenContent(
 
             LazyVerticalGrid(
                 columns = GridCells.Fixed(2),
-
-                // content padding
                 contentPadding = PaddingValues(12.dp),
                 content = {
                     items(state.products) { product ->
@@ -124,6 +126,9 @@ private fun SearchProductScreenContent(
                             shape = RoundedCornerShape(12.dp),
                             elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
                             modifier = Modifier
+                                .clickable {
+                                    navigateToAddProduct(product.id)
+                                }
                                 .fillMaxWidth()
                                 .padding(4.dp),
                         ) {
@@ -154,7 +159,8 @@ private fun SearchProductScreenContentPreview() {
         SearchProductScreenContent(
             state = PreviewData.searchProductState,
             event = {},
-            onPopBackStack = {}
+            onPopBackStack = {},
+            navigateToAddProduct = {},
         )
     }
 }
