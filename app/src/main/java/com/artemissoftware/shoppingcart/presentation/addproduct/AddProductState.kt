@@ -1,4 +1,4 @@
-package com.artemissoftware.shoppingcart.presentation.additem
+package com.artemissoftware.shoppingcart.presentation.addproduct
 
 import com.artemissoftware.shoppingcart.domain.models.Product
 

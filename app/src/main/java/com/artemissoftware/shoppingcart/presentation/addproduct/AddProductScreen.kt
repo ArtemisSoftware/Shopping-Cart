@@ -1,4 +1,4 @@
-package com.artemissoftware.shoppingcart.presentation.additem
+package com.artemissoftware.shoppingcart.presentation.addproduct
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -30,8 +30,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import com.artemissoftware.shoppingcart.PreviewData
-import com.artemissoftware.shoppingcart.presentation.additem.composables.ProductDescription
-import com.artemissoftware.shoppingcart.presentation.additem.composables.ProductDetail
+import com.artemissoftware.shoppingcart.presentation.addproduct.composables.ProductDescription
+import com.artemissoftware.shoppingcart.presentation.addproduct.composables.ProductDetail
 import com.artemissoftware.shoppingcart.ui.theme.PrimaryColor
 import com.artemissoftware.shoppingcart.ui.theme.ShoppingCartTheme
 
