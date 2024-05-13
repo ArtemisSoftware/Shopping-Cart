@@ -14,7 +14,9 @@ import androidx.navigation.compose.rememberNavController
 import com.artemissoftware.shoppingcart.presentation.navigation.RootNavGraph
 import com.artemissoftware.shoppingcart.presentation.navigation.Route
 import com.artemissoftware.shoppingcart.ui.theme.ShoppingCartTheme
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
