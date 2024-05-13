@@ -13,7 +13,7 @@ import com.artemissoftware.shoppingcart.data.database.entities.ProductEntity
 )
 abstract class ShoppingCartDatabase : RoomDatabase() {
 
-    abstract fun productDao(): ProductDao
+    abstract fun getProductDao(): ProductDao
 
     companion object {
         const val DATABASE_NAME = "shopping_cart_db"
