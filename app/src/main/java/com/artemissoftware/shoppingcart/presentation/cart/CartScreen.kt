@@ -57,7 +57,7 @@ private fun CartScreenContent(
                     shape = CircleShape,
                     modifier = Modifier
                         .align(Alignment.Center)
-                        .size(80.dp)
+                        .size(72.dp)
                         .offset(y = 50.dp)
                 ) {
                     Icon(
@@ -73,7 +73,8 @@ private fun CartScreenContent(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(it)
-                .padding(horizontal = 12.dp),
+                .padding(horizontal = 12.dp)
+                .padding(top = 12.dp),
             verticalArrangement = Arrangement.spacedBy(16.dp),
         ) {
             items(state.products){ product ->

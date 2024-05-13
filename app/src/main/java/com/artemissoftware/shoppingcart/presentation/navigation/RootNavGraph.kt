@@ -27,7 +27,7 @@ fun RootNavGraph(
         composable(route = Route.Cart.getFullRoute()) {
             CartScreen(
                 navigateToSearchProduct = {
-
+                    navController.navigate(Route.Search.getFullRoute())
                 }
             )
         }
@@ -52,7 +52,7 @@ fun RootNavGraph(
                     navController.popBackStack()
                 },
                 navigateToSearchProduct = {
-
+                    navController.navigate(Route.Search.getFullRoute())
                 }
             )
         }
