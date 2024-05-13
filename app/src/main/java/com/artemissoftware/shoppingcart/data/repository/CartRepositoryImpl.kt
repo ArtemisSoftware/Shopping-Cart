@@ -10,8 +10,9 @@ import com.artemissoftware.shoppingcart.domain.Resource
 import com.artemissoftware.shoppingcart.domain.models.Product
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import javax.inject.Inject
 
-class CartRepositoryImpl constructor(
+class CartRepositoryImpl @Inject constructor(
     private val pixabayApiSource: PixabayApiSource,
     private val productDao: ProductDao,
 ): CartRepository {
