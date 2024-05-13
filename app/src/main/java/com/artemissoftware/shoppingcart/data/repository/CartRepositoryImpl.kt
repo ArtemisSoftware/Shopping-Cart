@@ -17,6 +17,7 @@ class CartRepositoryImpl @Inject constructor(
     private val productDao: ProductDao,
 ): CartRepository {
     override fun getCart(): Flow<List<Product>> = productDao.getAll().map { list -> list.map { it.toProduct() } }
+    override fun getCartTotal(): Flow<Double> = productDao.getTotalPrice()
 
     override suspend fun saveProduct(product: Product) {
         productDao.insert(product.toEntity())

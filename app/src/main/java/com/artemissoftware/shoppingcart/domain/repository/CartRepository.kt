@@ -8,6 +8,8 @@ interface CartRepository {
 
     fun getCart(): Flow<List<Product>>
 
+    fun getCartTotal(): Flow<Double>
+
     suspend fun saveProduct(product: Product)
 
     suspend fun searchProducts(searchQuery: String): Resource<List<Product>>

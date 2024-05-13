@@ -18,10 +18,12 @@ import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.artemissoftware.shoppingcart.PreviewData
 import com.artemissoftware.shoppingcart.presentation.cart.composables.ProductCard
 import com.artemissoftware.shoppingcart.presentation.cart.composables.TotalBar
@@ -30,10 +32,13 @@ import com.artemissoftware.shoppingcart.ui.theme.ShoppingCartTheme
 @Composable
 fun CartScreen(
     navigateToSearchProduct: () -> Unit,
+    viewModel: CartViewModel = hiltViewModel()
 ) {
 
+    val state = viewModel.state.collectAsState().value
+
     CartScreenContent(
-        state = PreviewData.cartState,
+        state = state,
         navigateToSearchProduct = navigateToSearchProduct,
     )
 }
@@ -47,7 +52,7 @@ private fun CartScreenContent(
 
     Scaffold(
         bottomBar = {
-            TotalBar(total = state.total().toString())
+            TotalBar(total = state.cart.total.toString())
         },
         floatingActionButtonPosition = FabPosition.End,
         floatingActionButton = {
@@ -77,7 +82,7 @@ private fun CartScreenContent(
                 .padding(top = 12.dp),
             verticalArrangement = Arrangement.spacedBy(16.dp),
         ) {
-            items(state.products){ product ->
+            items(state.cart.products){ product ->
                 ProductCard(
                     product = product,
                     modifier = Modifier.fillMaxWidth()
