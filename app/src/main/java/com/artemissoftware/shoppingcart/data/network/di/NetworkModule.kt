@@ -1,6 +1,7 @@
 package com.artemissoftware.shoppingcart.data.network.di
 
 import com.artemissoftware.shoppingcart.data.network.PixabayApi
+import com.artemissoftware.shoppingcart.data.network.interceptors.ApiKeyInterceptor
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -26,6 +27,7 @@ open class NetworkModule {
                 HttpLoggingInterceptor()
                     .setLevel(HttpLoggingInterceptor.Level.BODY),
             )
+            .addInterceptor(ApiKeyInterceptor())
             .readTimeout(15L, TimeUnit.SECONDS)
             .connectTimeout(15L, TimeUnit.SECONDS)
             .build()

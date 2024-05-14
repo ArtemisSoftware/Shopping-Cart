@@ -12,5 +12,4 @@ data class ProductEntity(
     val amount: Int,
     val price: Double,
     val imageUrl: String,
-    val previewUrl: String,
 )

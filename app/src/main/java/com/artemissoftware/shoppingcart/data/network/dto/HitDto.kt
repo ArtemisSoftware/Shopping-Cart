@@ -16,7 +16,7 @@ data class HitDto(
     @field:Json(name = "imageSize")
     val imageSize: Int,
     @field:Json(name = "imageURL")
-    val imageURL: String,
+    val imageURL: String? = null,
     @field:Json(name = "imageWidth")
     val imageWidth: Int,
     @field:Json(name = "largeImageURL")

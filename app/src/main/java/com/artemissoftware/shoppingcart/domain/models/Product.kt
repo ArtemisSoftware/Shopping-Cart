@@ -1,6 +1,7 @@
 package com.artemissoftware.shoppingcart.domain.models
 
 import androidx.annotation.DrawableRes
+import com.artemissoftware.shoppingcart.R
 
 data class Product(
     val id: Int,
@@ -9,8 +10,7 @@ data class Product(
     val price: Double,
     val description: String,
     val imageUrl: String,
-    val previewUrl: String,
-    @DrawableRes val img: Int = -1
+    @DrawableRes val img: Int = R.drawable.office_code
 ){
     fun totalPrice() = quantity * price
 }

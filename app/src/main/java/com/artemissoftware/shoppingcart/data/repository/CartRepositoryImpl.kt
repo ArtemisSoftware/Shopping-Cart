@@ -28,4 +28,10 @@ class CartRepositoryImpl @Inject constructor(
             pixabayApiSource.getImages(searchQuery = searchQuery).hits.map { it.toProduct(searchQuery) }
         }
     }
+
+    override suspend fun getProduct(id: String): Resource<Product> {
+        return HandleNetwork.safeNetworkCall {
+            pixabayApiSource.getImageById(id = id).hits.first().toProduct()
+        }
+    }
 }

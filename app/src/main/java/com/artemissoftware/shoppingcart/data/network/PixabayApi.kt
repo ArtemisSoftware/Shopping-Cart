@@ -9,7 +9,11 @@ interface PixabayApi {
     @GET("/api/")
     suspend fun searchForImage(
         @Query("q") searchQuery: String,
-        //@Query("key") apiKey: String,
+    ): ImagesDto
+
+    @GET("/api/")
+    suspend fun searchForImageById(
+        @Query("id") id: String,
     ): ImagesDto
 
     companion object{

@@ -5,12 +5,11 @@ import com.artemissoftware.shoppingcart.data.network.dto.HitDto
 import com.artemissoftware.shoppingcart.domain.models.Product
 import kotlin.random.Random
 
-fun HitDto.toProduct(name: String): Product{
+fun HitDto.toProduct(name: String? = null): Product{
     return Product(
         id = id,
-        title = name,
-        imageUrl = imageURL,
-        previewUrl = previewURL,
+        title = name ?: tags.split(",")[0],
+        imageUrl = previewURL,
         quantity = 0,
         price = generateRandomPrice(minPrice = 10.0, maxPrice = 100.0),
         description = tags,
@@ -32,7 +31,6 @@ fun Product.toEntity(): ProductEntity{
         price = price,
         amount = quantity,
         imageUrl = imageUrl,
-        previewUrl = previewUrl,
         description = description,
     )
 }
@@ -43,7 +41,6 @@ fun ProductEntity.toProduct(): Product{
         title = name,
         price = price,
         imageUrl = imageUrl,
-        previewUrl = previewUrl,
         quantity = amount,
         description = description,
     )

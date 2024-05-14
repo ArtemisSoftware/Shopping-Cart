@@ -12,4 +12,10 @@ class PixabayApiSource @Inject constructor(private val pixabayApi: PixabayApi) {
             pixabayApi.searchForImage(searchQuery = searchQuery)
         }
     }
+
+    suspend fun getImageById(id: String): ImagesDto{
+        return HandleApi.safeApiCall {
+            pixabayApi.searchForImageById(id = id)
+        }
+    }
 }
