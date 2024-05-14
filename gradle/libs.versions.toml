@@ -19,6 +19,7 @@ room = "2.4.3"
 com-google-devtools-ksp = "1.8.20-1.0.11"
 hilt = "2.48"
 hilt-navigation-compose = "1.2.0"
+coil-compose = "2.4.0"
 
 [libraries]
 core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core-ktx" }
@@ -63,6 +64,9 @@ hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref
 hilt-android-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "hilt" }
 hilt-navigation-compose = { group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "hilt-navigation-compose" }
 
+# Coil
+
+coil-compose = { group = "io.coil-kt", name = "coil-compose", version.ref = "coil-compose" }
 
 [plugins]
 com-android-application = { id = "com.android.application", version.ref = "agp" }
