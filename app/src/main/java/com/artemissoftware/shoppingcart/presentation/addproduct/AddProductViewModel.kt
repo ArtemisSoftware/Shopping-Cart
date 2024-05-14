@@ -24,7 +24,7 @@ class AddProductViewModel @Inject constructor(
     val state = _state.asStateFlow()
 
     init {
-        savedStateHandle.get<String>(NavArguments.PRODUCT_ID)?.let { id ->
+        savedStateHandle.get<Int>(NavArguments.PRODUCT_ID)?.let { id ->
             getProduct(id = id)
         }
     }
@@ -57,7 +57,7 @@ class AddProductViewModel @Inject constructor(
         }
     }
 
-    private fun getProduct(id: String) = with(_state) {
+    private fun getProduct(id: Int) = with(_state) {
         viewModelScope.launch {
             getProductUseCase(id = id)
                 .onSuccess { product ->

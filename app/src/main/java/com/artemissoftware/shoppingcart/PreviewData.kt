@@ -15,7 +15,6 @@ object PreviewData {
             quantity = 2,
             price =234.0,
             imageUrl = "",
-            previewUrl = "",
             description = "Lorem Ipsum is simply dummy text of " +
                     "the printing and typesetting industry. " +
                     "Lorem Ipsum has been the industry's standard dummy text ever since. " +

@@ -38,7 +38,7 @@ fun RootNavGraph(
                     navController.popBackStack()
                 },
                 navigateToAddProduct = {
-
+                    navController.navigate(Route.AddProduct.withCustomArgs(it))
                 }
             )
         }

@@ -14,5 +14,5 @@ interface CartRepository {
 
     suspend fun searchProducts(searchQuery: String): Resource<List<Product>>
 
-    suspend fun getProduct(id: String): Resource<Product>
+    suspend fun getProduct(id: Int): Resource<Product>
 }

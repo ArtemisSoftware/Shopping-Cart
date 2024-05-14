@@ -29,9 +29,9 @@ class CartRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun getProduct(id: String): Resource<Product> {
+    override suspend fun getProduct(id: Int): Resource<Product> {
         return HandleNetwork.safeNetworkCall {
-            pixabayApiSource.getImageById(id = id).hits.first().toProduct()
+            pixabayApiSource.getImageById(id = id.toString()).hits.first().toProduct()
         }
     }
 }

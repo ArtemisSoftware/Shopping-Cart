@@ -1,16 +1,22 @@
 package com.artemissoftware.shoppingcart.data.mapper
 
+import androidx.compose.ui.text.capitalize
 import com.artemissoftware.shoppingcart.data.database.entities.ProductEntity
 import com.artemissoftware.shoppingcart.data.network.dto.HitDto
 import com.artemissoftware.shoppingcart.domain.models.Product
+import java.util.Locale
 import kotlin.random.Random
 
 fun HitDto.toProduct(name: String? = null): Product{
     return Product(
         id = id,
-        title = name ?: tags.split(",")[0],
+        title = (name ?: tags.split(",")[0]).replaceFirstChar {
+            if (it.isLowerCase()) it.titlecase(
+                Locale.ROOT
+            ) else it.toString()
+        },
         imageUrl = previewURL,
-        quantity = 0,
+        quantity = 1,
         price = generateRandomPrice(minPrice = 10.0, maxPrice = 100.0),
         description = tags,
     )

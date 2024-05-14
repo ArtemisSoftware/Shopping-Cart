@@ -61,7 +61,7 @@ internal fun ProductDetail(
             }
 
             Text(
-                text = "01",
+                text = product.quantity.toString(),
                 fontSize = 23.sp,
                 color = Color.DarkGray,
                 modifier = Modifier

@@ -98,7 +98,7 @@ private fun AddProductScreenContent(
                     .background(color = PrimaryColor)
                     .padding(paddingValues)
             ) {
-                val (productDescription, productDetail, productImage,  xxx) = createRefs()
+                val (productDescription, backgroundColor, productImage,  productDetail) = createRefs()
 
                 ProductDescription(
                     modifier = Modifier
@@ -118,7 +118,7 @@ private fun AddProductScreenContent(
                             RoundedCornerShape(topStart = 24.dp, topEnd = 24.dp)
                         )
                         .clip(RoundedCornerShape(topStart = 24.dp, topEnd = 24.dp))
-                        .constrainAs(productDetail) {
+                        .constrainAs(backgroundColor) {
                             top.linkTo(productDescription.bottom)
                             start.linkTo(productDescription.start)
                         }
@@ -132,7 +132,7 @@ private fun AddProductScreenContent(
                         .size(180.dp)
                         .constrainAs(productImage) {
                             top.linkTo(productDescription.bottom)
-                            bottom.linkTo(productDetail.top, 60.dp)
+                            bottom.linkTo(backgroundColor.top, 60.dp)
                             end.linkTo(parent.end, 20.dp)
                         }
                 )
@@ -141,7 +141,7 @@ private fun AddProductScreenContent(
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(16.dp)
-                        .constrainAs(xxx) {
+                        .constrainAs(productDetail) {
                             top.linkTo(productImage.bottom)
                             start.linkTo(productDescription.start)
                         },
@@ -154,6 +154,7 @@ private fun AddProductScreenContent(
                     },
                     onBuyNow = {
                         event(AddProductEvent.BuyProduct)
+                        onPopBackStack()
                     }
                 )
             }
