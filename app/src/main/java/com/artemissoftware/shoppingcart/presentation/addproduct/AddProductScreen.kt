@@ -20,6 +20,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults.topAppBarColors
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -29,6 +30,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.artemissoftware.shoppingcart.PreviewData
 import com.artemissoftware.shoppingcart.presentation.addproduct.composables.ProductDescription
 import com.artemissoftware.shoppingcart.presentation.addproduct.composables.ProductDetail
@@ -39,10 +41,13 @@ import com.artemissoftware.shoppingcart.ui.theme.ShoppingCartTheme
 fun AddProductScreen(
     onPopBackStack: () -> Unit,
     navigateToSearchProduct: () -> Unit,
+    viewModel: AddProductViewModel = hiltViewModel(),
 ) {
+    val state = viewModel.state.collectAsState().value
+
     AddProductScreenContent(
-        state = PreviewData.addProductState,
-        event = {},
+        state = state,
+        event = viewModel::onTriggerEvent,
         onPopBackStack = onPopBackStack,
         navigateToSearchProduct = navigateToSearchProduct
     )
