@@ -4,6 +4,7 @@ import com.artemissoftware.shoppingcart.domain.models.Cart
 import com.artemissoftware.shoppingcart.domain.models.Product
 import com.artemissoftware.shoppingcart.presentation.addproduct.AddProductState
 import com.artemissoftware.shoppingcart.presentation.cart.CartState
+import com.artemissoftware.shoppingcart.presentation.details.DetailsState
 import com.artemissoftware.shoppingcart.presentation.searchproduct.SearchProductState
 
 object PreviewData {
@@ -26,4 +27,6 @@ object PreviewData {
     val cartState = CartState(cart = cart)
     val addProductState = AddProductState(product = product)
     val searchProductState = SearchProductState(products = listOf(product, product),  searchQuery = "query")
+
+    val detailsState = DetailsState(product = product, notes = "This is a note")
 }
