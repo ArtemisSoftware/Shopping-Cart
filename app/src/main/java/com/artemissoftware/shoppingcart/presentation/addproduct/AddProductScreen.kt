@@ -34,7 +34,7 @@ import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.artemissoftware.shoppingcart.PreviewData
 import com.artemissoftware.shoppingcart.R
-import com.artemissoftware.shoppingcart.presentation.addproduct.composables.ProductDescription
+import com.artemissoftware.shoppingcart.presentation.composables.ProductDescription
 import com.artemissoftware.shoppingcart.presentation.addproduct.composables.ProductDetail
 import com.artemissoftware.shoppingcart.ui.theme.PrimaryColor
 import com.artemissoftware.shoppingcart.ui.theme.ShoppingCartTheme
