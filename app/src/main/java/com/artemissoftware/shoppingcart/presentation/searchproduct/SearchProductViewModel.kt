@@ -2,6 +2,7 @@ package com.artemissoftware.shoppingcart.presentation.searchproduct
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.artemissoftware.shoppingcart.domain.models.SnackBarState
 import com.artemissoftware.shoppingcart.domain.usecases.SearchProductsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -35,12 +36,17 @@ class SearchProductViewModel @Inject constructor(
         viewModelScope.launch {
             searchProductsUseCase(searchQuery = searchQuery)
                 .onSuccess { products ->
+
+                    val snackBarState = if(products.isEmpty()) SnackBarState.Info("No products found") else null
+
                     _state.update {
-                        it.copy(products = products)
+                        it.copy(products = products, snackBarState = snackBarState)
                     }
                 }
                 .onFailure {
-                    // TODO: completar
+                    _state.update {
+                        it.copy(snackBarState = SnackBarState.Info("Error"))
+                    }
                 }
         }
     }

@@ -12,6 +12,9 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.foundation.lazy.staggeredgrid.LazyVerticalStaggeredGrid
+import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridCells
+import androidx.compose.foundation.lazy.staggeredgrid.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBackIosNew
@@ -24,21 +27,33 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SearchBar
+import androidx.compose.material3.SnackbarDuration
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import coil.compose.AsyncImage
+import coil.request.ImageRequest
 import com.artemissoftware.shoppingcart.PreviewData
 import com.artemissoftware.shoppingcart.R
 import com.artemissoftware.shoppingcart.ui.theme.PrimaryColor
 import com.artemissoftware.shoppingcart.ui.theme.ShoppingCartTheme
+import kotlinx.coroutines.launch
 
 @Composable
 fun SearchProductScreen(
@@ -65,7 +80,25 @@ private fun SearchProductScreenContent(
     onPopBackStack: () -> Unit,
     navigateToAddProduct: (Int) -> Unit,
 ) {
+
+    val controller = LocalSoftwareKeyboardController.current
+    val snackbarHostState = remember { SnackbarHostState() }
+    val coroutine = rememberCoroutineScope()
+
+    LaunchedEffect(state.snackBarState) {
+        state.snackBarState?.let { snack ->
+            coroutine.launch {
+                snackbarHostState.showSnackbar(
+                    message = snack.title,
+                    withDismissAction = true,
+                    duration = SnackbarDuration.Short
+                )
+            }
+        }
+    }
+
     Scaffold(
+        snackbarHost = { SnackbarHost(hostState = snackbarHostState)},
         topBar = {
             TopAppBar(
                 title = {},
@@ -101,7 +134,10 @@ private fun SearchProductScreenContent(
                 trailingIcon = {
                     IconButton(
                         onClick = {
-                            event(SearchProductEvent.Search)
+                            if(state.searchQuery.isNotEmpty()) {
+                                event(SearchProductEvent.Search)
+                                controller?.hide()
+                            }
                         }
                     ) {
                         Icon(
@@ -123,8 +159,8 @@ private fun SearchProductScreenContent(
                     .padding(16.dp)
             ){}
 
-            LazyVerticalGrid(
-                columns = GridCells.Fixed(2),
+            LazyVerticalStaggeredGrid(
+                columns = StaggeredGridCells.Fixed(2),
                 contentPadding = PaddingValues(12.dp),
                 content = {
                     items(state.products) { product ->
@@ -132,22 +168,26 @@ private fun SearchProductScreenContent(
                             shape = RoundedCornerShape(12.dp),
                             elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
                             modifier = Modifier
+                                .clip(RoundedCornerShape(12.dp))
                                 .clickable {
                                     navigateToAddProduct(product.id)
                                 }
                                 .fillMaxWidth()
                                 .padding(4.dp),
                         ) {
-                            Image(
+
+                            AsyncImage(
                                 modifier = Modifier
-                                    .fillMaxWidth()
-                                    .padding(4.dp)
-                                    .clip(RoundedCornerShape(12.dp))
-                                    .size(160.dp)
-                                    .background(Color.Red)
-                                    .padding(8.dp),
-                                painter = painterResource(id = product.img),
-                                contentDescription = "",
+                                    .fillMaxSize()
+                                    .padding(8.dp)
+                                    .clip(RoundedCornerShape(12.dp)),
+                                model = ImageRequest
+                                    .Builder(LocalContext.current)
+                                    .data(product.imageUrl)
+                                    .placeholder(R.drawable.ic_launcher_foreground)
+                                    .build(),
+                                contentDescription = null,
+                                contentScale = ContentScale.Crop,
                             )
                         }
                     }

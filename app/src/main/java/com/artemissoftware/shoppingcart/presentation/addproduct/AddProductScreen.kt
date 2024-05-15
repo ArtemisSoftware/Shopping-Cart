@@ -1,6 +1,5 @@
 package com.artemissoftware.shoppingcart.presentation.addproduct
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -26,12 +25,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.hilt.navigation.compose.hiltViewModel
+import coil.compose.AsyncImage
+import coil.request.ImageRequest
 import com.artemissoftware.shoppingcart.PreviewData
+import com.artemissoftware.shoppingcart.R
 import com.artemissoftware.shoppingcart.presentation.addproduct.composables.ProductDescription
 import com.artemissoftware.shoppingcart.presentation.addproduct.composables.ProductDetail
 import com.artemissoftware.shoppingcart.ui.theme.PrimaryColor
@@ -124,17 +126,22 @@ private fun AddProductScreenContent(
                         }
                 )
 
-                Image(
-                    painter = painterResource(id = it.img),
-                    contentDescription = "Product Image",
-                    contentScale = ContentScale.Fit,
+                AsyncImage(
                     modifier = Modifier
-                        .size(180.dp)
+                        .size(200.dp)
+                        .clip(RoundedCornerShape(12.dp))
                         .constrainAs(productImage) {
                             top.linkTo(productDescription.bottom)
                             bottom.linkTo(backgroundColor.top, 60.dp)
                             end.linkTo(parent.end, 20.dp)
-                        }
+                        },
+                    model = ImageRequest
+                        .Builder(LocalContext.current)
+                        .data(it.imageUrl)
+                        .placeholder(R.drawable.ic_launcher_foreground)
+                        .build(),
+                    contentDescription = null,
+                    contentScale = ContentScale.Crop,
                 )
 
                 ProductDetail(
