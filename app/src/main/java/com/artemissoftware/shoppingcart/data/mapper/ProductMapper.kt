@@ -3,7 +3,7 @@ package com.artemissoftware.shoppingcart.data.mapper
 import com.artemissoftware.shoppingcart.data.database.entities.ProductEntity
 import com.artemissoftware.shoppingcart.data.network.dto.HitDto
 import com.artemissoftware.shoppingcart.domain.models.Product
-import com.artemissoftware.shoppingcart.ui.PriceUtil
+import com.artemissoftware.shoppingcart.data.util.PriceUtil
 import java.util.Locale
 
 internal fun HitDto.toProduct(name: String? = null): Product{

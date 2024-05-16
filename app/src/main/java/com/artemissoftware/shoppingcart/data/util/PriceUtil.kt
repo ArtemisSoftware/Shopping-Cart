@@ -1,4 +1,4 @@
-package com.artemissoftware.shoppingcart.ui
+package com.artemissoftware.shoppingcart.data.util
 
 import kotlin.random.Random
 
