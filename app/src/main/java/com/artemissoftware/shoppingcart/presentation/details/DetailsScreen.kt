@@ -137,7 +137,8 @@ private fun DetailsScreenContent(
                         },
                     product = it,
                     onSave = { comment, promoCode ->
-
+                        event(DetailsEvent.Save(comment = comment, promoCode = promoCode))
+                        onPopBackStack()
                     }
                 )
             }

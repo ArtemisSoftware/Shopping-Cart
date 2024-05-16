@@ -3,6 +3,7 @@ package com.artemissoftware.shoppingcart.presentation.addproduct
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.artemissoftware.shoppingcart.domain.models.SnackBarState
 import com.artemissoftware.shoppingcart.domain.usecases.GetProductUseCase
 import com.artemissoftware.shoppingcart.domain.usecases.SaveProductUseCase
 import com.artemissoftware.shoppingcart.presentation.navigation.NavArguments
@@ -65,7 +66,11 @@ class AddProductViewModel @Inject constructor(
                         it.copy(product = product)
                     }
                 }
-                .onFailure {  }
+                .onFailure {
+                    _state.update {
+                        it.copy(snackBarState = SnackBarState.Info("Error"))
+                    }
+                }
         }
 
         value.product?.let { currentProduct ->
@@ -73,8 +78,8 @@ class AddProductViewModel @Inject constructor(
         }
     }
 
-    private fun buyProduct() = with(_state) {
-        value.product?.let { currentProduct ->
+    private fun buyProduct() = with(_state.value) {
+        product?.let { currentProduct ->
             viewModelScope.launch {
                 saveProductUseCase(product = currentProduct)
             }

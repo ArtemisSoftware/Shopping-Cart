@@ -30,8 +30,15 @@ class CartRepositoryImpl @Inject constructor(
     }
 
     override suspend fun getProduct(id: Int): Resource<Product> {
-        return HandleNetwork.safeNetworkCall {
-            pixabayApiSource.getImageById(id = id.toString()).hits.first().toProduct()
+
+        val result = productDao.get(id)?.toProduct()
+
+        return if(result != null){
+            Resource.Success(result)
+        } else {
+            HandleNetwork.safeNetworkCall {
+                pixabayApiSource.getImageById(id = id.toString()).hits.first().toProduct()
+            }
         }
     }
 }

@@ -10,6 +10,8 @@ data class Product(
     val price: Double,
     val description: String,
     val imageUrl: String,
+    var promoCode: String = "",
+    var comments: String = "",
     @DrawableRes val img: Int = R.drawable.office_code
 ){
     fun totalPrice() = quantity * price
