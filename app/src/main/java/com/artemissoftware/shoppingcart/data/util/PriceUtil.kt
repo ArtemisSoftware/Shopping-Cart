@@ -9,6 +9,6 @@ internal object PriceUtil {
 
         val randomPrice = Random.nextDouble(minPrice, maxPrice)
         // Round to two decimal places
-        return String.format("%.2f", randomPrice).toDouble()
+        return String.format("%.2f", randomPrice).replace(",", ".").toDouble()
     }
 }
