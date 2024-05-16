@@ -58,8 +58,13 @@ internal fun ProductComments(
             .padding(12.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp),
     ) {
+        Text(
+            text = product.description,
+            modifier = Modifier.fillMaxWidth(),
+            color = Color.Gray
+        )
 
-        TextField(
+        OutlinedTextField(
             value = comment,
             onValueChange = { comment = it },
             modifier = Modifier
