@@ -1,0 +1,28 @@
+package com.artemissoftware.shoppingcart.domain.usecases
+
+import com.artemissoftware.shoppingcart.domain.Resource
+import com.artemissoftware.shoppingcart.domain.error.ValidationError
+
+class ValidateDetailUseCase constructor() {
+
+    operator fun invoke(comments: String, promoCode: String): Resource<Unit> {
+        if (comments.isEmpty() || promoCode.isEmpty()) {
+            return Resource.Failure(ValidationError.DetailError.EmptyField)
+        }
+        if (comments.length > MAX_NAME_LENGTH) {
+            return Resource.Failure(ValidationError.DetailError.TooManyCharacters)
+        }
+
+        try {
+            promoCode.toInt()
+        } catch (e: NumberFormatException) {
+            return Resource.Failure(ValidationError.DetailError.InvalidAmount)
+        }
+
+        return Resource.Success(Unit)
+    }
+
+    private companion object{
+        const val MAX_NAME_LENGTH = 30
+    }
+}
