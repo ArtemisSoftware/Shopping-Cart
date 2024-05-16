@@ -9,6 +9,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import com.artemissoftware.shoppingcart.presentation.addproduct.AddProductScreen
 import com.artemissoftware.shoppingcart.presentation.cart.CartScreen
+import com.artemissoftware.shoppingcart.presentation.details.DetailsScreen
 import com.artemissoftware.shoppingcart.presentation.searchproduct.SearchProductScreen
 
 private const val ROOT_GRAPH = "root_graph"
@@ -28,6 +29,9 @@ fun RootNavGraph(
             CartScreen(
                 navigateToSearchProduct = {
                     navController.navigate(Route.Search.getFullRoute())
+                },
+                navigateToDetail = {
+                    navController.navigate(Route.Detail.withCustomArgs(it))
                 }
             )
         }
@@ -57,6 +61,17 @@ fun RootNavGraph(
             )
         }
 
+        composable(
+            route = Route.Detail.getFullRoute(),
+            arguments = Route.Detail.arguments,
+        ) {
+            DetailsScreen(
+                onPopBackStack = {
+                    navController.popBackStack()
+                },
+            )
+        }
+
     }
 }
 
@@ -73,6 +88,18 @@ sealed class Route(
 
     object AddProduct : Route(
         route = "add_product",
+        arguments = listOf(
+            navArgument(
+                name = NavArguments.PRODUCT_ID,
+            ) {
+                nullable = false
+                type = NavType.IntType
+            }
+        )
+    )
+
+    object Detail : Route(
+        route = "detail",
         arguments = listOf(
             navArgument(
                 name = NavArguments.PRODUCT_ID,

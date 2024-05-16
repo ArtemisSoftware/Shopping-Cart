@@ -15,18 +15,27 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarDuration
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults.topAppBarColors
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
+import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.artemissoftware.shoppingcart.PreviewData
@@ -36,18 +45,20 @@ import com.artemissoftware.shoppingcart.presentation.addproduct.composables.Prod
 import com.artemissoftware.shoppingcart.presentation.details.composables.ProductComments
 import com.artemissoftware.shoppingcart.ui.theme.PrimaryColor
 import com.artemissoftware.shoppingcart.ui.theme.ShoppingCartTheme
+import kotlinx.coroutines.launch
 
 @Composable
 fun DetailsScreen(
     onPopBackStack: () -> Unit,
+    viewModel: DetailsViewModel = hiltViewModel()
 ) {
-//    val state = viewModel.state.collectAsState().value
-//
-//    DetailsScreenContent(
-//        state = state,
-//        event = viewModel::onTriggerEvent,
-//        onPopBackStack = onPopBackStack,
-//    )
+    val state = viewModel.state.collectAsState().value
+
+    DetailsScreenContent(
+        state = state,
+        event = viewModel::onTriggerEvent,
+        onPopBackStack = onPopBackStack,
+    )
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -57,7 +68,24 @@ private fun DetailsScreenContent(
     event: (DetailsEvent) -> Unit,
     onPopBackStack: () -> Unit,
 ) {
+    val controller = LocalSoftwareKeyboardController.current
+    val snackbarHostState = remember { SnackbarHostState() }
+    val coroutine = rememberCoroutineScope()
+
+    LaunchedEffect(state.snackBarState) {
+        state.snackBarState?.let { snack ->
+            coroutine.launch {
+                snackbarHostState.showSnackbar(
+                    message = snack.title,
+                    withDismissAction = true,
+                    duration = SnackbarDuration.Short
+                )
+            }
+        }
+    }
+
     Scaffold(
+        snackbarHost = { SnackbarHost(hostState = snackbarHostState) },
         topBar = {
             TopAppBar(
                 title = {},
@@ -137,6 +165,7 @@ private fun DetailsScreenContent(
                         },
                     product = it,
                     onSave = { comment, promoCode ->
+                        controller?.hide()
                         event(DetailsEvent.Save(comment = comment, promoCode = promoCode))
                         onPopBackStack()
                     }

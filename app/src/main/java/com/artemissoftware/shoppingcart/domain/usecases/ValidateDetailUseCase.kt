@@ -2,8 +2,9 @@ package com.artemissoftware.shoppingcart.domain.usecases
 
 import com.artemissoftware.shoppingcart.domain.Resource
 import com.artemissoftware.shoppingcart.domain.error.ValidationError
+import javax.inject.Inject
 
-class ValidateDetailUseCase constructor() {
+class ValidateDetailUseCase @Inject constructor() {
 
     operator fun invoke(comments: String, promoCode: String): Resource<Unit> {
         if (comments.isEmpty() || promoCode.isEmpty()) {

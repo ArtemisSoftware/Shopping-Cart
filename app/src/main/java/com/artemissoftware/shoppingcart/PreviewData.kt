@@ -28,5 +28,5 @@ object PreviewData {
     val addProductState = AddProductState(product = product)
     val searchProductState = SearchProductState(products = listOf(product, product),  searchQuery = "query")
 
-    val detailsState = DetailsState(product = product, notes = "This is a note")
+    val detailsState = DetailsState(product = product)
 }

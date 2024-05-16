@@ -31,6 +31,7 @@ import com.artemissoftware.shoppingcart.ui.theme.ShoppingCartTheme
 
 @Composable
 fun CartScreen(
+    navigateToDetail: (Int) -> Unit,
     navigateToSearchProduct: () -> Unit,
     viewModel: CartViewModel = hiltViewModel()
 ) {
@@ -39,6 +40,7 @@ fun CartScreen(
 
     CartScreenContent(
         state = state,
+        navigateToDetail = navigateToDetail,
         navigateToSearchProduct = navigateToSearchProduct,
     )
 }
@@ -48,6 +50,7 @@ fun CartScreen(
 private fun CartScreenContent(
     state: CartState,
     navigateToSearchProduct: () -> Unit,
+    navigateToDetail: (Int) -> Unit,
 ) {
 
     Scaffold(
@@ -85,7 +88,8 @@ private fun CartScreenContent(
             items(state.cart.products){ product ->
                 ProductCard(
                     product = product,
-                    modifier = Modifier.fillMaxWidth()
+                    modifier = Modifier.fillMaxWidth(),
+                    onClick = navigateToDetail
                 )
             }
         }
@@ -99,6 +103,7 @@ private fun CartScreenContentPreview() {
         CartScreenContent(
             state = PreviewData.cartState,
             navigateToSearchProduct = {},
+            navigateToDetail = {},
         )
     }
 }

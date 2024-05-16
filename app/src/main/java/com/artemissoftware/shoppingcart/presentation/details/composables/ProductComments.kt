@@ -64,6 +64,13 @@ internal fun ProductComments(
             color = Color.Gray
         )
 
+        Text(
+            text = stringResource(id = R.string.comments),
+            modifier = Modifier,
+            fontWeight = FontWeight.Bold,
+            color = Color.Gray
+        )
+
         OutlinedTextField(
             value = comment,
             onValueChange = { comment = it },
@@ -93,6 +100,7 @@ internal fun ProductComments(
             )
 
             OutlinedTextField(
+                singleLine = true,
                 keyboardOptions = KeyboardOptions(
                     capitalization = KeyboardCapitalization.None,
                     autoCorrect = true,
@@ -100,7 +108,11 @@ internal fun ProductComments(
                     imeAction = ImeAction.Next
                 ),
                 value = promoCode,
-                onValueChange = { promoCode = it },
+                onValueChange = {
+                    if(it.length < 3) {
+                        promoCode = it
+                    }
+                },
                 label = {  },
                 modifier = Modifier
                     .width(60.dp),
