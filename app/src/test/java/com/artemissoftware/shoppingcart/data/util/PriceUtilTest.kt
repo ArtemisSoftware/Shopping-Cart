@@ -25,7 +25,7 @@ internal class PriceUtilTest{
             PriceUtil.generateRandomPrice(minPrice = 1000.0, maxPrice = 100.0)
         }
     }
-    
+
     @ParameterizedTest(name = "price in range [{0},{1}]")
     @MethodSource("priceIntervals")
     fun `generate a price between multiple different intervals`(minPrice: Double, maxPrice: Double){

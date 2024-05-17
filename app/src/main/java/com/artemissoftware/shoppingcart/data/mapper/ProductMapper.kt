@@ -6,7 +6,7 @@ import com.artemissoftware.shoppingcart.domain.models.Product
 import com.artemissoftware.shoppingcart.data.util.PriceUtil
 import java.util.Locale
 
-internal fun HitDto.toProduct(name: String? = null): Product{
+internal fun HitDto.toProduct(name: String? = null, price: Double = PriceUtil.generateRandomPrice(minPrice = 10.0, maxPrice = 100.0)): Product{
     return Product(
         id = id,
         title = (name ?: tags.split(",")[0]).replaceFirstChar {
@@ -16,14 +16,12 @@ internal fun HitDto.toProduct(name: String? = null): Product{
         },
         imageUrl = previewURL,
         quantity = 1,
-        price = PriceUtil.generateRandomPrice(minPrice = 10.0, maxPrice = 100.0),
+        price = price,
         description = tags,
     )
 }
 
-
-
-fun Product.toEntity(): ProductEntity{
+internal fun Product.toEntity(): ProductEntity{
     return ProductEntity(
         id = id,
         name = title,
@@ -34,7 +32,7 @@ fun Product.toEntity(): ProductEntity{
     )
 }
 
-fun ProductEntity.toProduct(): Product{
+internal fun ProductEntity.toProduct(): Product{
     return Product(
         id = id,
         title = name,
@@ -44,4 +42,3 @@ fun ProductEntity.toProduct(): Product{
         description = description,
     )
 }
-
