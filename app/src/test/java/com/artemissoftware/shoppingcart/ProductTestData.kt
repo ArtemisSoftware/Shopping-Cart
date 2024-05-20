@@ -2,6 +2,7 @@ package com.artemissoftware.shoppingcart
 
 import com.artemissoftware.shoppingcart.data.database.entities.ProductEntity
 import com.artemissoftware.shoppingcart.data.network.dto.HitDto
+import com.artemissoftware.shoppingcart.data.network.dto.ImagesDto
 import com.artemissoftware.shoppingcart.domain.models.Product
 import java.util.Locale
 
@@ -35,6 +36,12 @@ internal object ProductTestData{
         user = "Viergacht",
         userImageURL = "https://cdn.pixabay.com/user/2015/04/01/16-05-10-517_250x250.png",
         fullHDURL = "https://cdn.pixabay.com/user/2015/04/01/16-05-10-517_250x250.png",
+    )
+
+    val imageDto = ImagesDto(
+        total = 1,
+        totalHits = 1,
+        hits = listOf(hitDto)
     )
 
     val productEntity = ProductEntity(
