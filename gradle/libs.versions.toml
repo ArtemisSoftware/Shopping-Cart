@@ -26,6 +26,7 @@ coil-compose = "2.4.0"
 junit-jupiter = "5.9.3"
 assertk = "0.26.1"
 de-mannodermaus-android-junit5 = "1.9.3.0"
+kotlinx-coroutines-test = "1.6.0"
 
 [libraries]
 core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core-ktx" }
@@ -57,6 +58,7 @@ converter-moshi = { group = "com.squareup.retrofit2", name = "converter-moshi", 
 # okhttp
 
 okhttp-logging-interceptor = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okhttp" }
+okhttp-mockwebserver = { group = "com.squareup.okhttp3", name = "mockwebserver", version.ref = "okhttp" }
 
 #Room
 
@@ -81,6 +83,9 @@ junit-jupiter-engine = { group = "org.junit.jupiter", name = "junit-jupiter-engi
 junit-jupiter-params = { group = "org.junit.jupiter", name = "junit-jupiter-params", version.ref = "junit-jupiter" }
 
 assertk = { group = "com.willowtreeapps.assertk", name = "assertk", version.ref = "assertk" }
+
+kotlinx-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "kotlinx-coroutines-test" }
+
 
 
 [plugins]
