@@ -84,6 +84,8 @@ dependencies {
 
     implementation(libs.coil.compose)
 
+    implementation(libs.okhttp.mockwebserver)
+
     testImplementation(libs.junit)
     testImplementation(libs.junit.jupiter.api)
     testRuntimeOnly(libs.junit.jupiter.engine)
