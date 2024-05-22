@@ -4,8 +4,13 @@ import assertk.assertFailure
 import assertk.assertThat
 import assertk.assertions.isEqualTo
 import com.artemissoftware.shoppingcart.ProductTestData.imageDto
+import com.artemissoftware.shoppingcart.ProductTestData.multipleImagesDto
 import com.artemissoftware.shoppingcart.data.ServerMockData
+import com.artemissoftware.shoppingcart.data.ServerMockData.ERROR_RESPONSE
+import com.artemissoftware.shoppingcart.data.ServerMockData.MULTIPLE_IMAGE_RESPONSE
+import com.artemissoftware.shoppingcart.data.ServerMockData.SINGLE_IMAGE_RESPONSE
 import com.artemissoftware.shoppingcart.data.network.PixabayApi
+import com.artemissoftware.shoppingcart.test.util.extensions.enqueueResponse
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.runTest
 import okhttp3.OkHttpClient
@@ -43,13 +48,8 @@ internal class PixabayApiSourceTest{
     }
 
     @Test
-    fun `Get image by id`() = runBlocking{
-
-        val response = MockResponse()
-            .setResponseCode(200)
-            .setBody(ServerMockData.imageResponse)
-
-        mockWebServer.enqueue(response)
+    fun `Get image by id`() = runBlocking {
+        mockWebServer.enqueueResponse(SINGLE_IMAGE_RESPONSE)
 
         val result = pixabayApiSource.getImageById("2")
 
@@ -58,12 +58,8 @@ internal class PixabayApiSourceTest{
     }
 
     @Test
-    fun `Get image by id, return error`()  = runTest {
-        val response = MockResponse()
-            .setResponseCode(400)
-            .setBody("[ERROR 400] Invalid value for \"id\".")
-
-        mockWebServer.enqueue(response)
+    fun `Get image by id, return error`() = runTest {
+        mockWebServer.enqueueResponse(ERROR_RESPONSE, 400)
 
         assertFailure {
             pixabayApiSource.getImageById("2")
@@ -71,27 +67,18 @@ internal class PixabayApiSourceTest{
     }
 
     @Test
-    fun `Get images`() = runBlocking{
-
-        val response = MockResponse()
-            .setResponseCode(200)
-            .setBody(ServerMockData.imageResponse)
-
-        mockWebServer.enqueue(response)
+    fun `Get images`() = runBlocking {
+        mockWebServer.enqueueResponse(MULTIPLE_IMAGE_RESPONSE)
 
         val result = pixabayApiSource.getImages("eggs")
 
         assertThat(result)
-            .isEqualTo(imageDto)
+            .isEqualTo(multipleImagesDto)
     }
 
     @Test
     fun `Get images, return error`()  = runTest {
-        val response = MockResponse()
-            .setResponseCode(400)
-            .setBody("[ERROR 400] Invalid value for \"id\".")
-
-        mockWebServer.enqueue(response)
+        mockWebServer.enqueueResponse(ERROR_RESPONSE, 400)
 
         assertFailure {
             pixabayApiSource.getImageById("eggs")

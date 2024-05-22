@@ -6,15 +6,15 @@ import okio.buffer
 import okio.source
 import java.nio.charset.StandardCharsets
 
-fun MockWebServer.enqueueResponse(fileName: String, code: Int) {
-    val inputStream = javaClass.classLoader?.getResourceAsStream("api-response/$fileName")
+fun MockWebServer.enqueueResponse(filePath: String, code: Int = 200) {
+    val inputStream = javaClass.classLoader?.getResourceAsStream(filePath)
 
     val source = inputStream?.let { inputStream.source().buffer() }
-    source?.let {
-        enqueue(
-            MockResponse()
-                .setResponseCode(code)
-                .setBody(source.readString(StandardCharsets.UTF_8))
-        )
-    }
+        ?: throw Exception("The file <$filePath> does not exist")
+
+    enqueue(
+        MockResponse()
+            .setResponseCode(code)
+            .setBody(source.readString(StandardCharsets.UTF_8))
+    )
 }
