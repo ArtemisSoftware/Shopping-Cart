@@ -21,6 +21,13 @@ internal fun HitDto.toProduct(name: String? = null, price: Double = PriceUtil.ge
     )
 }
 
+internal fun List<HitDto>.toProduct(name: String? = null, price: Double = PriceUtil.generateRandomPrice(minPrice = 10.0, maxPrice = 100.0)): Product? {
+    if(this.isEmpty())
+        return null
+
+    return this.first().toProduct(name = name, price = price)
+}
+
 internal fun Product.toEntity(): ProductEntity{
     return ProductEntity(
         id = id,

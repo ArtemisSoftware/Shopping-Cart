@@ -31,6 +31,6 @@ class FakeProductDao : ProductDao {
     }
 
     override fun getTotalPrice(): Flow<Double> {
-        return flow { emit(products.value.sumOf { it.price * it.price })  }
+        return flow { emit(products.value.sumOf { it.price * it.amount })  }
     }
 }

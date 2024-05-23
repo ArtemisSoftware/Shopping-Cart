@@ -7,6 +7,7 @@ import com.artemissoftware.shoppingcart.data.mapper.toProduct
 import com.artemissoftware.shoppingcart.data.network.source.PixabayApiSource
 import com.artemissoftware.shoppingcart.domain.repository.CartRepository
 import com.artemissoftware.shoppingcart.domain.Resource
+import com.artemissoftware.shoppingcart.domain.error.ImagesError
 import com.artemissoftware.shoppingcart.domain.models.Product
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
@@ -36,8 +37,23 @@ class CartRepositoryImpl @Inject constructor(
         return if(result != null){
             Resource.Success(result)
         } else {
-            HandleNetwork.safeNetworkCall {
-                pixabayApiSource.getImageById(id = id.toString()).hits.first().toProduct()
+            getImageById(id = id)
+        }
+    }
+
+    private suspend fun getImageById(id: Int): Resource<Product>{
+        val result = HandleNetwork.safeNetworkCall {
+            pixabayApiSource.getImageById(id = id.toString()).hits.toProduct()
+        }
+
+        return when(result){
+            is Resource.Failure -> Resource.Failure(result.error)
+            is Resource.Success -> {
+                if(result.data == null){
+                    Resource.Failure(ImagesError.SearchError.NoImagesFound)
+                } else {
+                    Resource.Success(result.data)
+                }
             }
         }
     }

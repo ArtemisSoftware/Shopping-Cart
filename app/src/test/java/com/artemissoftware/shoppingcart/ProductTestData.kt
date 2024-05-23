@@ -54,19 +54,21 @@ internal object ProductTestData{
     )
 
     fun getProduct(
+        id: Int = 1108880,
         name: String? = null,
         tagList: String = tags,
         price: Double = productPrice,
+        quantity: Int = 1
     ): Product{
         return Product(
-            id = 1108880,
+            id = id,
             title = (name ?: tagList.split(",")[0]).replaceFirstChar {
                 if (it.isLowerCase()) it.titlecase(
                     Locale.ROOT
                 ) else it.toString()
             },
             imageUrl = previewURL,
-            quantity = 1,
+            quantity = quantity,
             price = price,
             description = tagList,
         )
