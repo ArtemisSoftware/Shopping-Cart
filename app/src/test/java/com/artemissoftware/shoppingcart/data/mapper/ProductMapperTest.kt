@@ -31,7 +31,7 @@ internal class ProductMapperTest {
     }
 
     @Test
-    fun `Map empty List HitDto to product with established name`(){
+    fun `Map empty List HitDto to null product`(){
         assertThat(listOf<HitDto>().toProduct(name = productName, price = 100.0))
             .isNull()
     }
