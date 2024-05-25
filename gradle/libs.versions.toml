@@ -20,6 +20,7 @@ com-google-devtools-ksp = "1.8.20-1.0.11"
 hilt = "2.48"
 hilt-navigation-compose = "1.2.0"
 coil-compose = "2.4.0"
+mockk = "1.12.5"
 
 # test
 
@@ -85,6 +86,8 @@ junit-jupiter-params = { group = "org.junit.jupiter", name = "junit-jupiter-para
 assertk = { group = "com.willowtreeapps.assertk", name = "assertk", version.ref = "assertk" }
 
 kotlinx-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "kotlinx-coroutines-test" }
+
+mockk = { group = "io.mockk", name = "mockk", version.ref = "mockk" }
 
 
 

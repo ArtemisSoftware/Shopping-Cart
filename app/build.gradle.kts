@@ -93,6 +93,7 @@ dependencies {
     testImplementation(libs.assertk)
     testImplementation(libs.okhttp.mockwebserver)
     testImplementation(libs.kotlinx.coroutines.test)
+    testImplementation(libs.mockk)
 
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.espresso.core)
