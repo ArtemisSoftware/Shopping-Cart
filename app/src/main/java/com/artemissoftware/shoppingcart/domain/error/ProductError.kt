@@ -1,8 +1,8 @@
 package com.artemissoftware.shoppingcart.domain.error
 
-sealed interface ImagesError : SCError {
+sealed interface ProductError : SCError {
 
-    sealed class SearchError : ImagesError {
+    sealed class SearchError : ProductError {
         object NoImagesFound : SearchError()
     }
 }
