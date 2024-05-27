@@ -129,4 +129,10 @@ internal object ProductTestData{
         totalHits = 500,
         hits = listOf(hit2Dto, hit3Dto)
     )
+
+    val emptyImagesDto = ImagesDto(
+        total = 0,
+        totalHits = 0,
+        hits = emptyList()
+    )
 }
