@@ -8,7 +8,7 @@ data class HitDto(
     @field:Json(name = "downloads")
     val downloads: Int,
     @field:Json(name = "fullHDURL")
-    val fullHDURL: String,
+    val fullHDURL: String = "",
     @field:Json(name = "id")
     val id: Int,
     @field:Json(name = "imageHeight")

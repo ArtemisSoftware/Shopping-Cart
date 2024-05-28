@@ -67,10 +67,10 @@ internal class PixabayApiSourceTest{
     }
 
     @Test
-    fun `Get images`() = runBlocking {
+    fun `Get images by search query`() = runBlocking {
         mockWebServer.enqueueResponse(MULTIPLE_IMAGE_RESPONSE)
 
-        val result = pixabayApiSource.getImages("eggs")
+        val result = pixabayApiSource.getImages("desk")
 
         assertThat(result)
             .isEqualTo(multipleImagesDto)

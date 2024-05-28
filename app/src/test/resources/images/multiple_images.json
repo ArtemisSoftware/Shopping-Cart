@@ -24,7 +24,8 @@
       "comments": 51,
       "user_id": 4283981,
       "user": "rawpixel",
-      "userImageURL": "https://cdn.pixabay.com/user/2024/03/14/08-35-52-464_250x250.jpg"
+      "userImageURL": "https://cdn.pixabay.com/user/2024/03/14/08-35-52-464_250x250.jpg",
+      "fullHDURL": "https://cdn.pixabay.com/user/2024/03/14/08-35-52-464_250x250.jpg"
     },
     {
       "id": 2953719,
@@ -42,13 +43,14 @@
       "imageHeight": 2670,
       "imageSize": 3038554,
       "views": 47234,
-      "downloads": 30582,
+      "downloads": 18841,
       "collections": 182,
       "likes": 157,
       "comments": 6,
       "user_id": 4283981,
       "user": "rawpixel",
-      "userImageURL": "https://cdn.pixabay.com/user/2024/03/14/08-35-52-464_250x250.jpg"
+      "userImageURL": "https://cdn.pixabay.com/user/2024/03/14/08-35-52-464_250x250.jpg",
+      "fullHDURL": "https://cdn.pixabay.com/user/2024/03/14/08-35-52-464_250x250.jpg"
     }
   ]
 }
