@@ -72,10 +72,6 @@ class AddProductViewModel @Inject constructor(
                     }
                 }
         }
-
-        value.product?.let { currentProduct ->
-
-        }
     }
 
     private fun buyProduct() = with(_state.value) {
