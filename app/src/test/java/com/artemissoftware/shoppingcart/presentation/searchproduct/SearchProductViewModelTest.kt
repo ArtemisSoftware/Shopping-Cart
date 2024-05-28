@@ -6,13 +6,10 @@ import assertk.assertions.isEqualTo
 import assertk.assertions.isNull
 import com.artemissoftware.shoppingcart.ProductTestData
 import com.artemissoftware.shoppingcart.domain.error.DataError
-import com.artemissoftware.shoppingcart.domain.error.ProductError
-import com.artemissoftware.shoppingcart.domain.models.Cart
 import com.artemissoftware.shoppingcart.domain.models.SnackBarState
-import com.artemissoftware.shoppingcart.domain.usecases.GetCartUseCase
 import com.artemissoftware.shoppingcart.domain.usecases.SearchProductsUseCase
 import com.artemissoftware.shoppingcart.fakes.FakeCartRepository
-import com.artemissoftware.shoppingcart.presentation.cart.CartViewModel
+import com.artemissoftware.shoppingcart.util.MainCoroutineExtension
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.StandardTestDispatcher
@@ -21,11 +18,12 @@ import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.runTest
 import kotlinx.coroutines.test.setMain
 import org.junit.jupiter.api.AfterEach
-import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.extension.ExtendWith
 
 @OptIn(ExperimentalCoroutinesApi::class)
+@ExtendWith(MainCoroutineExtension::class)
 internal class SearchProductViewModelTest{
 
     private lateinit var cartRepository: FakeCartRepository
@@ -37,9 +35,6 @@ internal class SearchProductViewModelTest{
 
     @BeforeEach
     fun setUp() {
-        val testDispatcher = StandardTestDispatcher()
-        Dispatchers.setMain(testDispatcher)
-
         cartRepository = FakeCartRepository(productList = products)
 
         searchProductsUseCase = SearchProductsUseCase(cartRepository)
@@ -47,10 +42,6 @@ internal class SearchProductViewModelTest{
         viewModel = SearchProductViewModel(searchProductsUseCase = searchProductsUseCase)
     }
 
-    @AfterEach
-    fun tearDown() {
-        Dispatchers.resetMain()
-    }
 
     @Test
     fun `On search query update, check state update`() = runTest {
