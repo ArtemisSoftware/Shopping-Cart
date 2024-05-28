@@ -8,6 +8,6 @@ sealed interface ValidationError : SCError {
 
         object TooManyCharacters : DetailError()
 
-        object InvalidAmount : DetailError()
+        object InvalidPromocodeNumber : DetailError()
     }
 }
