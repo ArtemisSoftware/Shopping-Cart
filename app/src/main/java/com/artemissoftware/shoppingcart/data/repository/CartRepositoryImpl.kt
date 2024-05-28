@@ -1,18 +1,16 @@
 package com.artemissoftware.shoppingcart.data.repository
 
-import androidx.compose.ui.text.capitalize
 import com.artemissoftware.shoppingcart.data.HandleNetwork
 import com.artemissoftware.shoppingcart.data.database.dao.ProductDao
 import com.artemissoftware.shoppingcart.data.mapper.toEntity
 import com.artemissoftware.shoppingcart.data.mapper.toProduct
 import com.artemissoftware.shoppingcart.data.network.source.PixabayApiSource
-import com.artemissoftware.shoppingcart.domain.repository.CartRepository
 import com.artemissoftware.shoppingcart.domain.Resource
 import com.artemissoftware.shoppingcart.domain.error.ProductError
 import com.artemissoftware.shoppingcart.domain.models.Product
+import com.artemissoftware.shoppingcart.domain.repository.CartRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
-import java.util.Locale
 import javax.inject.Inject
 
 class CartRepositoryImpl @Inject constructor(
@@ -28,11 +26,7 @@ class CartRepositoryImpl @Inject constructor(
 
     override suspend fun searchProducts(searchQuery: String): Resource<List<Product>> {
         return HandleNetwork.safeNetworkCall {
-            pixabayApiSource.getImages(searchQuery = searchQuery.replaceFirstChar {
-                if (it.isLowerCase()) it.titlecase(
-                    Locale.ROOT
-                ) else it.toString()
-            }).hits.map { it.toProduct(searchQuery) }
+            pixabayApiSource.getImages(searchQuery = searchQuery).hits.map { it.toProduct(searchQuery) }
         }
     }
 

@@ -104,6 +104,19 @@ private fun DetailsScreenContent(
             )
         }
     ) { paddingValues ->
+
+        if(state.isLoading){
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(paddingValues)
+            ) {
+                CircularProgressIndicator(
+                    modifier = Modifier.align(Alignment.Center)
+                )
+            }
+        }
+
         state.product?.let {
             ConstraintLayout(
                 modifier = Modifier
@@ -169,16 +182,6 @@ private fun DetailsScreenContent(
                         event(DetailsEvent.Save(comment = comment, promoCode = promoCode))
                         onPopBackStack()
                     }
-                )
-            }
-        } ?: run {
-            Box(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(paddingValues)
-            ) {
-                CircularProgressIndicator(
-                    modifier = Modifier.align(Alignment.Center)
                 )
             }
         }
