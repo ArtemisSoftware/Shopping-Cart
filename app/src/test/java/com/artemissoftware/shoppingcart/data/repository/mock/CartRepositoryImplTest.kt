@@ -13,7 +13,7 @@ import com.artemissoftware.shoppingcart.data.network.source.PixabayApiSource
 import com.artemissoftware.shoppingcart.data.repository.CartRepositoryImpl
 import com.artemissoftware.shoppingcart.domain.Resource
 import com.artemissoftware.shoppingcart.domain.error.DataError
-import com.artemissoftware.shoppingcart.domain.error.ImagesError
+import com.artemissoftware.shoppingcart.domain.error.ProductError
 import com.artemissoftware.shoppingcart.domain.models.Product
 import io.mockk.coEvery
 import io.mockk.coVerify
@@ -193,7 +193,7 @@ internal class CartRepositoryImplTest{
             .isTrue()
 
         assertThat((result as Resource.Failure).error)
-            .isEqualTo(ImagesError.SearchError.NoImagesFound)
+            .isEqualTo(ProductError.SearchError.NoImagesFound)
     }
 
     @Test
