@@ -1,4 +1,4 @@
-package com.artemissoftware.shoppingcart.util
+package com.artemissoftware.shoppingcart.test.util.extensions
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi

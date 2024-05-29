@@ -9,15 +9,10 @@ import com.artemissoftware.shoppingcart.domain.error.DataError
 import com.artemissoftware.shoppingcart.domain.models.SnackBarState
 import com.artemissoftware.shoppingcart.domain.usecases.SearchProductsUseCase
 import com.artemissoftware.shoppingcart.fakes.FakeCartRepository
-import com.artemissoftware.shoppingcart.util.MainCoroutineExtension
-import kotlinx.coroutines.Dispatchers
+import com.artemissoftware.shoppingcart.test.util.extensions.MainCoroutineExtension
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.advanceUntilIdle
-import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.runTest
-import kotlinx.coroutines.test.setMain
-import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith

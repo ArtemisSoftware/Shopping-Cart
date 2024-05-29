@@ -1,7 +1,6 @@
 package com.artemissoftware.shoppingcart.presentation.details
 
 import androidx.lifecycle.SavedStateHandle
-import app.cash.turbine.test
 import assertk.assertThat
 import assertk.assertions.isEqualTo
 import assertk.assertions.isFalse
@@ -12,14 +11,8 @@ import com.artemissoftware.shoppingcart.domain.usecases.SaveProductUseCase
 import com.artemissoftware.shoppingcart.domain.usecases.ValidateDetailUseCase
 import com.artemissoftware.shoppingcart.fakes.FakeCartRepository
 import com.artemissoftware.shoppingcart.presentation.navigation.NavArguments
-import com.artemissoftware.shoppingcart.util.MainCoroutineExtension
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.test.StandardTestDispatcher
-import kotlinx.coroutines.test.resetMain
+import com.artemissoftware.shoppingcart.test.util.extensions.MainCoroutineExtension
 import kotlinx.coroutines.test.runTest
-import kotlinx.coroutines.test.setMain
-import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith

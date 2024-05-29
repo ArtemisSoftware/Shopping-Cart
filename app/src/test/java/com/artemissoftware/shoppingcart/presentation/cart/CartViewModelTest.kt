@@ -7,7 +7,7 @@ import com.artemissoftware.shoppingcart.ProductTestData
 import com.artemissoftware.shoppingcart.domain.models.Cart
 import com.artemissoftware.shoppingcart.domain.usecases.GetCartUseCase
 import com.artemissoftware.shoppingcart.fakes.FakeCartRepository
-import com.artemissoftware.shoppingcart.util.MainCoroutineExtension
+import com.artemissoftware.shoppingcart.test.util.extensions.MainCoroutineExtension
 import kotlinx.coroutines.test.runTest
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
