@@ -87,6 +87,8 @@ dependencies {
     implementation(libs.okhttp.mockwebserver)
     implementation(libs.junit.jupiter.api)
     implementation(libs.kotlinx.coroutines.test)
+    implementation(libs.hilt.android.testing)
+    implementation(libs.espresso.core)
 
     testImplementation(libs.junit)
     testImplementation(libs.junit.jupiter.api)
