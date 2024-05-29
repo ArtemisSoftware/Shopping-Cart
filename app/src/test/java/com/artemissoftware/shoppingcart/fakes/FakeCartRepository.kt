@@ -8,10 +8,11 @@ import com.artemissoftware.shoppingcart.domain.repository.CartRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.map
 
 internal class FakeCartRepository(productList: List<Product> = emptyList()): CartRepository {
 
-    private val products = MutableStateFlow<List<Product>>(productList)
+    private val products = MutableStateFlow(productList)
     var errorToReturn: SCError? = null
 
     override fun getCart(): Flow<List<Product>> {
@@ -19,7 +20,9 @@ internal class FakeCartRepository(productList: List<Product> = emptyList()): Car
     }
 
     override fun getCartTotal(): Flow<Double> {
-        return flow { emit(products.value.sumOf { it.totalPrice() })  }
+        return products.map { list ->
+            list.sumOf { it.totalPrice() }
+        }
     }
 
     override suspend fun saveProduct(product: Product) {
