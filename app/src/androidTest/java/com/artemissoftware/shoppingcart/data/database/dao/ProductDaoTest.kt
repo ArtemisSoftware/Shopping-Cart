@@ -2,20 +2,25 @@ package com.artemissoftware.shoppingcart.data.database.dao
 
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
+import androidx.test.ext.junit.runners.AndroidJUnit4
+import androidx.test.filters.SmallTest
+import app.cash.turbine.test
 import assertk.assertThat
+import assertk.assertions.hasSize
 import assertk.assertions.isEqualTo
 import assertk.assertions.isNull
 import com.artemissoftware.shoppingcart.InstrumentedProductTestData.productEntities
 import com.artemissoftware.shoppingcart.InstrumentedProductTestData.productEntity
-import com.artemissoftware.shoppingcart.InstrumentedProductTestData.productEntity2
 import com.artemissoftware.shoppingcart.data.database.ShoppingCartDatabase
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
 import org.junit.After
-import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
+import org.junit.runner.RunWith
 
+
+@RunWith(AndroidJUnit4::class)
+@SmallTest
 internal class ProductDaoTest {
 
     private lateinit var shoppingCartDatabase: ShoppingCartDatabase
@@ -27,10 +32,14 @@ internal class ProductDaoTest {
             ApplicationProvider.getApplicationContext(),
             ShoppingCartDatabase::class.java
         )
-            .allowMainThreadQueries()
             .build()
 
         productDao = shoppingCartDatabase.getProductDao()
+    }
+
+    @After
+    fun tearDown(){
+        shoppingCartDatabase.close()
     }
 
     @Test
@@ -55,15 +64,19 @@ internal class ProductDaoTest {
     }
 
     @Test
-    fun `Get all products`() = runBlocking {
+    fun `Get all products`() = runBlocking  {
+
         productEntities.forEach { entity ->
             productDao.insert(productEntity = entity)
         }
+        productDao.getAll().test {
 
-        val result = productDao.getAll().first()
-
-        assertThat(result)
-            .isEqualTo(productEntities)
+            val list = awaitItem()
+            assertThat(list)
+                .hasSize(productEntities.size)
+            assertThat(list)
+                .isEqualTo(productEntities)
+        }
     }
 
     @Test
@@ -72,14 +85,13 @@ internal class ProductDaoTest {
             productDao.insert(productEntity = entity)
         }
 
-        val result = productDao.getTotalPrice().first()
+        productDao.getTotalPrice().test {
+            val emission = awaitItem()
 
-        assertThat(result)
-            .isEqualTo(productEntities.sumOf { it.price * it.amount })
-    }
-
-    @After
-    fun tearDown(){
-        shoppingCartDatabase.close()
+            with(emission){
+                assertThat(this)
+                    .isEqualTo(productEntities.sumOf { it.price * it.amount })
+            }
+        }
     }
 }
