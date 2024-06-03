@@ -10,6 +10,7 @@ import com.artemissoftware.shoppingcart.data.database.entities.ProductEntity
                     ProductEntity::class
                ],
     version = 1,
+    exportSchema = true
 )
 abstract class ShoppingCartDatabase : RoomDatabase() {
 
