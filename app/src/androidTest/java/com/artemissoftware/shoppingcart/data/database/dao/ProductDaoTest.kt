@@ -1,9 +1,5 @@
 package com.artemissoftware.shoppingcart.data.database.dao
 
-import androidx.room.Room
-import androidx.test.core.app.ApplicationProvider
-import androidx.test.ext.junit.runners.AndroidJUnit4
-import androidx.test.filters.SmallTest
 import app.cash.turbine.test
 import assertk.assertThat
 import assertk.assertions.hasSize
@@ -12,28 +8,29 @@ import assertk.assertions.isNull
 import com.artemissoftware.shoppingcart.InstrumentedProductTestData.productEntities
 import com.artemissoftware.shoppingcart.InstrumentedProductTestData.productEntity
 import com.artemissoftware.shoppingcart.data.database.ShoppingCartDatabase
+import dagger.hilt.android.testing.HiltAndroidRule
+import dagger.hilt.android.testing.HiltAndroidTest
 import kotlinx.coroutines.runBlocking
 import org.junit.After
 import org.junit.Before
+import org.junit.Rule
 import org.junit.Test
-import org.junit.runner.RunWith
+import javax.inject.Inject
 
 
-@RunWith(AndroidJUnit4::class)
-@SmallTest
+@HiltAndroidTest
 internal class ProductDaoTest {
 
-    private lateinit var shoppingCartDatabase: ShoppingCartDatabase
+    @get:Rule
+    var hiltRule = HiltAndroidRule(this)
+
+    @Inject
+    lateinit var shoppingCartDatabase: ShoppingCartDatabase
     private lateinit var productDao: ProductDao
 
     @Before
     fun setUp(){
-        shoppingCartDatabase = Room.inMemoryDatabaseBuilder(
-            ApplicationProvider.getApplicationContext(),
-            ShoppingCartDatabase::class.java
-        )
-            .build()
-
+        hiltRule.inject()
         productDao = shoppingCartDatabase.getProductDao()
     }
 
