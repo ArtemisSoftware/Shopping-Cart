@@ -1,5 +1,6 @@
 package com.artemissoftware.shoppingcart.data.database.entities
 
+import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
@@ -12,4 +13,6 @@ data class ProductEntity(
     val amount: Int,
     val price: Double,
     val imageUrl: String,
+    @ColumnInfo(name = "comments", defaultValue = "N/A")
+    val comments: String
 )
