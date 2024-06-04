@@ -29,7 +29,7 @@ internal fun Product.toEntity(): ProductEntity{
         amount = quantity,
         imageUrl = imageUrl,
         description = description,
-        comments = comments
+        commentary = comments
     )
 }
 
@@ -41,6 +41,6 @@ internal fun ProductEntity.toProduct(): Product{
         imageUrl = imageUrl,
         quantity = amount,
         description = description,
-        comments = comments,
+        comments = commentary,
     )
 }
