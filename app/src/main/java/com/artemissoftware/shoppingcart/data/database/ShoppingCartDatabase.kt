@@ -7,10 +7,12 @@ import androidx.room.RoomDatabase
 import androidx.room.migration.AutoMigrationSpec
 import com.artemissoftware.shoppingcart.data.database.dao.ProductDao
 import com.artemissoftware.shoppingcart.data.database.entities.ProductEntity
+import com.artemissoftware.shoppingcart.data.database.entities.SellerEntity
 
 @Database(
     entities = [
-                    ProductEntity::class
+                    ProductEntity::class,
+                    SellerEntity::class,
                ],
     version = 3,
     exportSchema = true,
