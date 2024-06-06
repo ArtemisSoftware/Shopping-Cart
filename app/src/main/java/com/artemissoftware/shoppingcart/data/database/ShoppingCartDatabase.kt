@@ -8,25 +8,23 @@ import androidx.room.migration.AutoMigrationSpec
 import com.artemissoftware.shoppingcart.data.database.dao.ProductDao
 import com.artemissoftware.shoppingcart.data.database.entities.ProductEntity
 import com.artemissoftware.shoppingcart.data.database.entities.SellerEntity
+import com.artemissoftware.shoppingcart.data.database.migrations.Migration2To3
 
 @Database(
     entities = [
                     ProductEntity::class,
                     SellerEntity::class,
                ],
-    version = 3,
+    version = 4,
     exportSchema = true,
     autoMigrations = [
         AutoMigration(from = 1, to = 2),
-        AutoMigration(from = 2, to = 3, spec = ShoppingCartDatabase.Migration2To3::class),
+        AutoMigration(from = 2, to = 3, spec = Migration2To3::class),
     ]
 )
 abstract class ShoppingCartDatabase : RoomDatabase() {
 
     abstract fun getProductDao(): ProductDao
-
-    @RenameColumn(tableName = "products", fromColumnName = "comments", toColumnName = "commentary")
-    class Migration2To3: AutoMigrationSpec
 
     companion object {
         const val DATABASE_NAME = "shopping_cart_db"
