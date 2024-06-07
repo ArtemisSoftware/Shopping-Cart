@@ -3,6 +3,7 @@ package com.artemissoftware.shoppingcart.data.database.di
 import android.content.Context
 import androidx.room.Room
 import com.artemissoftware.shoppingcart.data.database.ShoppingCartDatabase
+import com.artemissoftware.shoppingcart.data.database.migrations.Migration3To4.migration3To4
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -25,6 +26,7 @@ object DataBaseModule {
                 ShoppingCartDatabase::class.java,
                 ShoppingCartDatabase.DATABASE_NAME,
             )
+            .addMigrations(migration3To4)
             .build()
     }
 

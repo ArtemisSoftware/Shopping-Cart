@@ -6,6 +6,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.artemissoftware.shoppingcart.data.database.entities.ProductEntity
+import com.artemissoftware.shoppingcart.data.database.entities.SellerEntity
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -24,4 +25,7 @@ interface ProductDao {
 
     @Query("SELECT SUM(price * amount) FROM products")
     fun getTotalPrice(): Flow<Double>
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insert(sellerEntity: SellerEntity)
 }

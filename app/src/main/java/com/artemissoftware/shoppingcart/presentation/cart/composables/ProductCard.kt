@@ -95,6 +95,11 @@ internal fun ProductCard(
                         )
                     }
                 }
+
+                Text(
+                    fontWeight = FontWeight.Bold,
+                    text = product.comments,
+                )
             }
         }
     }
