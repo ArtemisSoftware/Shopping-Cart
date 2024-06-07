@@ -16,6 +16,7 @@ internal object InstrumentedProductTestData{
         description = tags,
         name = productName.capitalize(),
         price = productPrice,
+        commentary = "no comments"
     )
 
     val productEntity2 = ProductEntity(
@@ -25,6 +26,7 @@ internal object InstrumentedProductTestData{
         description = tags,
         name = productName.capitalize(),
         price = productPrice,
+        commentary = "no comments"
     )
 
     val productEntities = listOf(productEntity, productEntity2)

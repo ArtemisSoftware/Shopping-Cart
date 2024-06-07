@@ -113,6 +113,7 @@ dependencies {
     androidTestImplementation(libs.ui.test.junit4)
     androidTestImplementation(libs.assertk)
     androidTestImplementation(libs.turbine)
+    androidTestImplementation(libs.room.testing)
     
     debugImplementation(libs.ui.tooling)
     debugImplementation(libs.ui.test.manifest)
