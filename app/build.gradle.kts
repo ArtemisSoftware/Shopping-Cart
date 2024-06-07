@@ -49,6 +49,10 @@ android {
     ksp {
         arg("room.schemaLocation", "$projectDir/schemas")
     }
+    sourceSets {
+        // Adds exported schema location as test app assets.
+        getByName("androidTest").assets.srcDir("$projectDir/schemas")
+    }
     packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
