@@ -1,5 +1,6 @@
 package com.artemissoftware.shoppingcart.data.database.migrations
 
+import androidx.room.Room
 import androidx.room.testing.MigrationTestHelper
 import androidx.sqlite.db.framework.FrameworkSQLiteOpenHelperFactory
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -8,6 +9,7 @@ import assertk.assertThat
 import assertk.assertions.isEqualTo
 import assertk.assertions.isTrue
 import com.artemissoftware.shoppingcart.data.database.ShoppingCartDatabase
+import com.artemissoftware.shoppingcart.data.database.migrations.Migration3To4.migration3To4
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -25,8 +27,12 @@ class MigrationTest {
         FrameworkSQLiteOpenHelperFactory()
     )
 
+    private val ALL_MIGRATIONS = arrayOf(
+        migration3To4
+    )
+
     @Test
-    fun migration1To2_containsCorrectData() {
+    fun `migration 1 To 2 contains correct data`() {
         var db = helper.createDatabase(DB_NAME, 1).apply {
             execSQL("INSERT INTO products VALUES(1, 'table', 'my table', 2, 3.0, 'image.jpg')")
             close()
@@ -37,8 +43,38 @@ class MigrationTest {
         db.query("SELECT * FROM products").apply {
             assertThat(moveToFirst())
                 .isTrue()
+
+            assertThat(arrayOf("id", "name", "description", "amount", "price", "imageUrl", "comments"))
+                .isEqualTo(columnNames)
+
             assertThat(getString(getColumnIndex("comments")))
                 .isEqualTo("N/A")
+        }
+    }
+
+    @Test
+    fun `migration 3 To 4 contains correct data`() {
+        var db = helper.createDatabase(DB_NAME, 3)
+
+        db = helper.runMigrationsAndValidate(DB_NAME, 4, true, migration3To4)
+
+        db.query("SELECT * FROM sellers").apply {
+
+            assertThat(arrayOf("uuid", "name", "imageUrl"))
+                .isEqualTo(columnNames)
+        }
+    }
+
+    @Test
+    fun `test all migrations`() {
+        helper.createDatabase(DB_NAME, 1).apply { close() }
+
+        Room.databaseBuilder(
+            InstrumentationRegistry.getInstrumentation().targetContext,
+            ShoppingCartDatabase::class.java,
+            DB_NAME
+        ).addMigrations(*ALL_MIGRATIONS).build().apply {
+            openHelper.writableDatabase.close()
         }
     }
 }
