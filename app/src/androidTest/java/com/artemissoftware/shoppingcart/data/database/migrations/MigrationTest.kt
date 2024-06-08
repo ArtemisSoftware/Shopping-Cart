@@ -9,7 +9,7 @@ import assertk.assertThat
 import assertk.assertions.isEqualTo
 import assertk.assertions.isTrue
 import com.artemissoftware.shoppingcart.data.database.ShoppingCartDatabase
-import com.artemissoftware.shoppingcart.data.database.migrations.Migration3To4.migration3To4
+import com.artemissoftware.shoppingcart.data.database.migrations.ManualMigration.migration3To4
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -23,12 +23,8 @@ class MigrationTest {
     val helper = MigrationTestHelper(
         InstrumentationRegistry.getInstrumentation(),
         ShoppingCartDatabase::class.java,
-        listOf(Migration2To3()),
+        AutomaticMigration.ALL_MIGRATIONS,
         FrameworkSQLiteOpenHelperFactory()
-    )
-
-    private val ALL_MIGRATIONS = arrayOf(
-        migration3To4
     )
 
     @Test
@@ -73,7 +69,7 @@ class MigrationTest {
             InstrumentationRegistry.getInstrumentation().targetContext,
             ShoppingCartDatabase::class.java,
             DB_NAME
-        ).addMigrations(*ALL_MIGRATIONS).build().apply {
+        ).addMigrations(*ManualMigration.ALL_MIGRATIONS).build().apply {
             openHelper.writableDatabase.close()
         }
     }
