@@ -3,13 +3,11 @@ package com.artemissoftware.shoppingcart.presentation.cart.composables
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.assertTextEquals
-import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithTag
 import com.artemissoftware.shoppingcart.R
 import com.artemissoftware.shoppingcart.presentation.cart.TestTags
 import com.artemissoftware.shoppingcart.test.ShoppingCartComposableTest
 import com.artemissoftware.shoppingcart.ui.theme.ShoppingCartTheme
-import org.junit.Rule
 import org.junit.Test
 
 class TotalBarTest: ShoppingCartComposableTest() {
