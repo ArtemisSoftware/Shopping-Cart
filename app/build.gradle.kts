@@ -91,11 +91,13 @@ dependencies {
 
     implementation(libs.coil.compose)
 
+    // To create a test module to be used by other modules
     implementation(libs.okhttp.mockwebserver)
     implementation(libs.junit.jupiter.api)
     implementation(libs.kotlinx.coroutines.test)
     implementation(libs.hilt.android.testing)
     implementation(libs.espresso.core)
+    implementation(libs.ui.test.junit4)
 
     testImplementation(libs.junit)
     testImplementation(libs.junit.jupiter.api)
