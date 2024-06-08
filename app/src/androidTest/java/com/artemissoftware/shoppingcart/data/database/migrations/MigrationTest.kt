@@ -7,6 +7,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import assertk.assertThat
 import assertk.assertions.isEqualTo
+import assertk.assertions.isNull
 import assertk.assertions.isTrue
 import com.artemissoftware.shoppingcart.data.database.ShoppingCartDatabase
 import com.artemissoftware.shoppingcart.data.database.migrations.ManualMigration.migration3To4
@@ -58,6 +59,27 @@ class MigrationTest {
 
             assertThat(arrayOf("uuid", "name", "imageUrl"))
                 .isEqualTo(columnNames)
+        }
+    }
+
+    @Test
+    fun `migration 4 To 5 contains correct data`() {
+        var db = helper.createDatabase(DB_NAME, 4).apply {
+            execSQL("INSERT INTO products VALUES(1, 'table', 'my table', 2, 3.0, 'image.jpg', 'my comments')")
+            close()
+        }
+
+        db = helper.runMigrationsAndValidate(DB_NAME, 5, true)
+
+        db.query("SELECT * FROM products").apply {
+            assertThat(moveToFirst())
+                .isTrue()
+
+            assertThat(arrayOf("id", "name", "description", "amount", "price", "imageUrl", "comments", "sellerId"))
+                .isEqualTo(columnNames)
+
+            assertThat(getString(getColumnIndex("sellerId")))
+                .isNull()
         }
     }
 
