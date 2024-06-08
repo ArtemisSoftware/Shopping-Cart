@@ -12,12 +12,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.artemissoftware.shoppingcart.R
+import com.artemissoftware.shoppingcart.presentation.cart.TestTags
 import com.artemissoftware.shoppingcart.ui.theme.ShoppingCartTheme
 
 @Composable
@@ -31,17 +33,20 @@ internal fun TotalBar(
     ) {
         Row(
             modifier = Modifier
+                .testTag(TestTags.TOTAL_CONTENT)
                 .padding(all = 12.dp),
             horizontalArrangement = Arrangement.Start,
             verticalAlignment = Alignment.CenterVertically,
         ) {
             Text(
+                modifier = Modifier.testTag(TestTags.TOTAL_DESCRIPTION),
                 style = MaterialTheme.typography.labelMedium,
                 fontWeight = FontWeight.Bold,
                 fontSize = 20.sp,
                 text = stringResource(id = R.string.total_cost),
             )
             Text(
+                modifier = Modifier.testTag(TestTags.TOTAL_VALUE),
                 style = MaterialTheme.typography.labelMedium,
                 fontWeight = FontWeight.Bold,
                 fontSize = 20.sp,
