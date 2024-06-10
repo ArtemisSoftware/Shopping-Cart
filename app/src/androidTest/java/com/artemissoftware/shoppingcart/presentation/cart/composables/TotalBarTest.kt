@@ -32,7 +32,7 @@ class TotalBarTest: ShoppingCartComposableTest() {
         composeRule.onNodeWithTag(TestTags.TOTAL_CONTENT)
             .assertIsDisplayed()
 
-        composeRule.onNodeWithTag(TestTags.TOTAL_DESCRIPTION)
+        composeRule.onNodeWithTag(TestTags.TOTAL_LABEL)
             .assertIsDisplayed()
             .assertTextEquals(description)
 

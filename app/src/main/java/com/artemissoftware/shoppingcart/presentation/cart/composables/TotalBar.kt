@@ -39,7 +39,7 @@ internal fun TotalBar(
             verticalAlignment = Alignment.CenterVertically,
         ) {
             Text(
-                modifier = Modifier.testTag(TestTags.TOTAL_DESCRIPTION),
+                modifier = Modifier.testTag(TestTags.TOTAL_LABEL),
                 style = MaterialTheme.typography.labelMedium,
                 fontWeight = FontWeight.Bold,
                 fontSize = 20.sp,

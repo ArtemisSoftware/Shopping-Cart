@@ -17,6 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -26,6 +27,14 @@ import coil.request.ImageRequest
 import com.artemissoftware.shoppingcart.PreviewData
 import com.artemissoftware.shoppingcart.R
 import com.artemissoftware.shoppingcart.domain.models.Product
+import com.artemissoftware.shoppingcart.presentation.cart.TestTags.PRODUCT_CARD
+import com.artemissoftware.shoppingcart.presentation.cart.TestTags.PRODUCT_CARD_COMMENT
+import com.artemissoftware.shoppingcart.presentation.cart.TestTags.PRODUCT_CARD_CONTENT
+import com.artemissoftware.shoppingcart.presentation.cart.TestTags.PRODUCT_CARD_IMAGE
+import com.artemissoftware.shoppingcart.presentation.cart.TestTags.PRODUCT_CARD_QUANTITY
+import com.artemissoftware.shoppingcart.presentation.cart.TestTags.PRODUCT_CARD_QUANTITY_LABEL
+import com.artemissoftware.shoppingcart.presentation.cart.TestTags.PRODUCT_CARD_TITLE
+import com.artemissoftware.shoppingcart.presentation.cart.TestTags.PRODUCT_CARD_TOTAL
 import com.artemissoftware.shoppingcart.ui.theme.ShoppingCartTheme
 
 @Composable
@@ -36,6 +45,7 @@ internal fun ProductCard(
 ) {
     Card(
         modifier = modifier
+            .testTag(PRODUCT_CARD)
             .clickable {
                 onClick(product.id)
             },
@@ -45,6 +55,7 @@ internal fun ProductCard(
 
         Row (
             modifier = Modifier
+                .testTag(PRODUCT_CARD_CONTENT)
                 .fillMaxWidth()
                 .padding(12.dp),
             verticalAlignment = Alignment.CenterVertically,
@@ -52,6 +63,7 @@ internal fun ProductCard(
         ){
             AsyncImage(
                 modifier = Modifier
+                    .testTag(PRODUCT_CARD_IMAGE)
                     .size(100.dp)
                     .clip(RoundedCornerShape(10.dp)),
                 model = ImageRequest
@@ -67,6 +79,8 @@ internal fun ProductCard(
                 verticalArrangement = Arrangement.spacedBy(16.dp),
             ) {
                 Text(
+                    modifier = Modifier
+                        .testTag(PRODUCT_CARD_TITLE),
                     fontWeight = FontWeight.Bold,
                     text = product.title,
                 )
@@ -77,6 +91,8 @@ internal fun ProductCard(
                     horizontalArrangement = Arrangement.SpaceBetween,
                 ) {
                     Text(
+                        modifier = Modifier
+                            .testTag(PRODUCT_CARD_TOTAL),
                         fontWeight = FontWeight.Bold,
                         text = product.totalPrice().toString(),
                     )
@@ -86,10 +102,14 @@ internal fun ProductCard(
                         horizontalArrangement = Arrangement.SpaceEvenly,
                     ) {
                         Text(
+                            modifier = Modifier
+                                .testTag(PRODUCT_CARD_QUANTITY_LABEL),
                             fontWeight = FontWeight.Bold,
                             text = stringResource(id = R.string.qty),
                         )
                         Text(
+                            modifier = Modifier
+                                .testTag(PRODUCT_CARD_QUANTITY),
                             fontWeight = FontWeight.Bold,
                             text = product.quantity.toString(),
                         )
@@ -97,6 +117,8 @@ internal fun ProductCard(
                 }
 
                 Text(
+                    modifier = Modifier
+                        .testTag(PRODUCT_CARD_COMMENT),
                     fontWeight = FontWeight.Bold,
                     text = product.comments,
                 )

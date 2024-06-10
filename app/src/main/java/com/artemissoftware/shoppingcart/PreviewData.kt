@@ -19,8 +19,8 @@ object PreviewData {
             description = "Lorem Ipsum is simply dummy text of " +
                     "the printing and typesetting industry. " +
                     "Lorem Ipsum has been the industry's standard dummy text ever since. " +
-                    "When an unknown printer took a galley.",
-            img = R.drawable.office_code)
+                    "When an unknown printer took a galley."
+        )
 
     val cart = Cart(listOf(product, product), 20.0)
 
