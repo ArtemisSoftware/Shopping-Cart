@@ -51,7 +51,7 @@ internal fun ProductComments(
     modifier: Modifier = Modifier,
 ) {
     var comment by remember {
-        mutableStateOf("")
+        mutableStateOf(product.comments)
     }
 
     var promoCode by remember {
