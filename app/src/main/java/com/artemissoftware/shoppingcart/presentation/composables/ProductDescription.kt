@@ -7,6 +7,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -14,6 +15,9 @@ import androidx.compose.ui.unit.sp
 import com.artemissoftware.shoppingcart.PreviewData
 import com.artemissoftware.shoppingcart.R
 import com.artemissoftware.shoppingcart.domain.models.Product
+import com.artemissoftware.shoppingcart.presentation.composables.TestTags.PRODUCT_DESCRIPTION_CONTENT
+import com.artemissoftware.shoppingcart.presentation.composables.TestTags.PRODUCT_DESCRIPTION_PRICE
+import com.artemissoftware.shoppingcart.presentation.composables.TestTags.PRODUCT_DESCRIPTION_TITLE
 import com.artemissoftware.shoppingcart.ui.theme.ShoppingCartTheme
 
 @Composable
@@ -22,7 +26,8 @@ internal fun ProductDescription(
     modifier: Modifier = Modifier,
 ) {
     Column(
-        modifier = modifier,
+        modifier = modifier
+            .testTag(PRODUCT_DESCRIPTION_CONTENT),
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
 
@@ -42,7 +47,9 @@ internal fun ProductDescription(
                 text = product.title,
                 fontSize = 30.sp,
                 color = Color.White,
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier
+                    .testTag(PRODUCT_DESCRIPTION_TITLE)
+                    .fillMaxWidth()
             )
         }
 
@@ -62,7 +69,9 @@ internal fun ProductDescription(
                 text = product.price.toString(),
                 fontSize = 30.sp,
                 color = Color.White,
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier
+                    .testTag(PRODUCT_DESCRIPTION_PRICE)
+                    .fillMaxWidth()
             )
         }
     }
