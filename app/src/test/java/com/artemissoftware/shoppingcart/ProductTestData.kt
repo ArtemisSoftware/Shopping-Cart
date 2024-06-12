@@ -51,6 +51,7 @@ internal object ProductTestData{
         description = tags,
         name = productName.capitalize(),
         price = productPrice,
+        commentary = "my comment"
     )
 
     fun getProduct(
