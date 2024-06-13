@@ -8,6 +8,7 @@ internal object TestTags {
 
     const val CART_LIST = "cart_list"
     const val CART_TOTAL_BAR = "cart_total_bar"
+    const val CART_ADD_BUTTON = "cart_add_button"
 
     const val PRODUCT_CARD = "product_card"
     const val PRODUCT_CARD_CONTENT = "product_card_bar"
