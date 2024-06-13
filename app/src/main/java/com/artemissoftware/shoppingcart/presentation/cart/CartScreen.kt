@@ -26,6 +26,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.artemissoftware.shoppingcart.PreviewData
+import com.artemissoftware.shoppingcart.presentation.cart.TestTags.CART_ADD_BUTTON
 import com.artemissoftware.shoppingcart.presentation.cart.TestTags.CART_LIST
 import com.artemissoftware.shoppingcart.presentation.cart.TestTags.CART_TOTAL_BAR
 import com.artemissoftware.shoppingcart.presentation.cart.composables.ProductCard
@@ -70,6 +71,7 @@ private fun CartScreenContent(
                     onClick = navigateToSearchProduct,
                     shape = CircleShape,
                     modifier = Modifier
+                        .testTag(CART_ADD_BUTTON)
                         .align(Alignment.Center)
                         .size(72.dp)
                         .offset(y = 50.dp)
