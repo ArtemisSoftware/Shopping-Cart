@@ -73,4 +73,22 @@ class CartScreenRobot<T : ComponentActivity>(
 
         return this
     }
+
+    fun assertProductIsDisplayed(position: Int = 0, comment: String): CartScreenRobot<T> {
+        val cartList = composeRule
+            .onNodeWithTag(TestTags.CART_LIST)
+
+        cartList
+            .assertIsDisplayed()
+
+        cartList
+            .onChildAt(position)
+            .assertIsDisplayed()
+
+        composeRule
+            .onNodeWithTag(TestTags.PRODUCT_CARD_COMMENT, useUnmergedTree = true)
+            .assertIsDisplayed()
+            .assertTextEquals(comment)
+        return this
+    }
 }

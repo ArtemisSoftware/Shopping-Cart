@@ -8,9 +8,11 @@ import androidx.compose.ui.test.hasTestTag
 import androidx.compose.ui.test.junit4.AndroidComposeTestRule
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.performClick
+import androidx.compose.ui.test.performTextClearance
 import androidx.compose.ui.test.performTextInput
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import com.artemissoftware.shoppingcart.domain.models.Product
+import com.artemissoftware.shoppingcart.presentation.details.TestTags.PRODUCT_DETAIL_ERROR
 import com.artemissoftware.shoppingcart.presentation.composables.TestTags as ComposableTestTags
 
 class DetailsScreenRobot<T : ComponentActivity>(
@@ -62,7 +64,24 @@ class DetailsScreenRobot<T : ComponentActivity>(
         composeRule
             .onNodeWithTag(TestTags.PRODUCT_COMMENTS_COMMENT)
             .assertIsDisplayed()
+            .performTextClearance()
+
+        composeRule
+            .onNodeWithTag(TestTags.PRODUCT_COMMENTS_COMMENT)
             .performTextInput(comments)
+
+        return this
+    }
+
+    @OptIn(ExperimentalTestApi::class)
+    fun assertError(): DetailsScreenRobot<T> {
+
+        composeRule
+            .waitUntilExactlyOneExists(hasTestTag(PRODUCT_DETAIL_ERROR))
+
+        composeRule
+            .onNodeWithTag(PRODUCT_DETAIL_ERROR, useUnmergedTree = true)
+            .assertIsDisplayed()
 
         return this
     }

@@ -37,6 +37,28 @@ class DetailsScreenTest: ShoppingCartAndroidTest() {
     }
 
     @Test
+    fun load_existing_product_from_data_base_update_with_erroneous_commentary() = runBlocking<Unit> {
+
+        val detailsScreenRobot = DetailsScreenRobot(composeRule)
+        setProductInDataBase()
+
+        composeRule.setContent {
+            DetailsScreen(
+                onPopBackStack = {},
+            )
+        }
+
+        composeRule.awaitIdle()
+
+        detailsScreenRobot
+            .assertProductIsDisplayed(product = InstrumentedProductTestData.productV1.copy(comments = commentary))
+            .updateComments("Incredible long and extra large comments that no one wants to read or see this day and age")
+            .saveDetail()
+            .assertError()
+
+    }
+
+    @Test
     fun load_product_from_api_check_data() {
 
         mockServer.dispatcher = MockServerDispatcher().successDispatcher()
