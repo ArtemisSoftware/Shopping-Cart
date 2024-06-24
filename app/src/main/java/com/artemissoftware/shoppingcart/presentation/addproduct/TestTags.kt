@@ -8,4 +8,5 @@ internal object TestTags {
     const val PRODUCT_DETAIL_ADD_BUTTON = "product_detail_add_button"
     const val PRODUCT_DETAIL_BUY_BUTTON = "product_detail_buy_button"
 
+    const val PRODUCT_DETAIL_ERROR = "product_detail_error"
 }

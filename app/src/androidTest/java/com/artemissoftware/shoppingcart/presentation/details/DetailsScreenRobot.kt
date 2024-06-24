@@ -1,23 +1,25 @@
 package com.artemissoftware.shoppingcart.presentation.details
 
+import androidx.activity.ComponentActivity
 import androidx.compose.ui.test.ExperimentalTestApi
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.assertTextEquals
 import androidx.compose.ui.test.hasTestTag
+import androidx.compose.ui.test.junit4.AndroidComposeTestRule
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performTextInput
+import androidx.test.ext.junit.rules.ActivityScenarioRule
 import com.artemissoftware.shoppingcart.domain.models.Product
-import com.artemissoftware.shoppingcart.test.ShoppingCartComposeRule
 import com.artemissoftware.shoppingcart.presentation.composables.TestTags as ComposableTestTags
 
-class DetailsScreenRobot(
-    private val composeRule: ShoppingCartComposeRule
+class DetailsScreenRobot<T : ComponentActivity>(
+    private val composeRule: AndroidComposeTestRule<ActivityScenarioRule<T>, T>
 ) {
     @OptIn(ExperimentalTestApi::class)
     fun assertProductIsDisplayed(
         product: Product,
-    ): DetailsScreenRobot {
+    ): DetailsScreenRobot<T> {
 
         composeRule
             .waitUntilExactlyOneExists(hasTestTag(ComposableTestTags.PRODUCT_DESCRIPTION_TITLE))
@@ -55,7 +57,7 @@ class DetailsScreenRobot(
         return this
     }
 
-    fun updateComments(comments: String): DetailsScreenRobot {
+    fun updateComments(comments: String): DetailsScreenRobot<T>  {
 
         composeRule
             .onNodeWithTag(TestTags.PRODUCT_COMMENTS_COMMENT)
@@ -65,7 +67,7 @@ class DetailsScreenRobot(
         return this
     }
 
-    fun saveDetail(): DetailsScreenRobot {
+    fun saveDetail(): DetailsScreenRobot<T>  {
         composeRule
             .onNodeWithTag(TestTags.PRODUCT_COMMENTS_SAVE_BUTTON)
             .assertIsDisplayed()
