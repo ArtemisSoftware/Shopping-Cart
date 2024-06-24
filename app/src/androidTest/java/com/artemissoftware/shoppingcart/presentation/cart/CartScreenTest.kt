@@ -2,6 +2,7 @@ package com.artemissoftware.shoppingcart.presentation.cart
 
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import com.artemissoftware.shoppingcart.InstrumentedProductTestData.productEntity
+import com.artemissoftware.shoppingcart.InstrumentedProductTestData.product_Entity
 import com.artemissoftware.shoppingcart.test.ShoppingCartAndroidTest
 import com.artemissoftware.shoppingcart.test.TestActivity
 import dagger.hilt.android.testing.HiltAndroidTest
@@ -17,7 +18,7 @@ class CartScreenTest: ShoppingCartAndroidTest(){
     val composeRule = createAndroidComposeRule<TestActivity>()
 
     @Test
-    fun load_cart_check_it_has_products_and_total_is_correct() = runBlocking<Unit>{
+    fun load_cart_check_products_and_total_are_correct() = runBlocking<Unit>{
 
         val total = setCartProducts()
 
@@ -35,8 +36,22 @@ class CartScreenTest: ShoppingCartAndroidTest(){
             .assertCartTotalIsDisplayed(total = total)
     }
 
+    @Test
+    fun load_empty_cart() {
+
+        composeRule.setContent {
+            CartScreen(
+                navigateToDetail = {},
+                navigateToSearchProduct = {}
+            )
+        }
+
+        CartScreenRobot(composeRule)
+            .assertEmptyCartListIsDisplayed()
+    }
+
     private suspend fun setCartProducts(): Double{
-        db.getProductDao().insert(productEntity)
+        db.getProductDao().insert(product_Entity)
         return db.getProductDao().getTotalPrice().first()
     }
 }

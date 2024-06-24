@@ -5,11 +5,46 @@ import com.artemissoftware.shoppingcart.domain.models.Product
 
 internal object InstrumentedProductTestData{
 
-    val productName = "my product"
+    val id = 1108880
+    val previewURL = "https://cdn.pixabay.com/photo/2015/12/26/17/08/egg-1108880_150.jpg"
+    val productName = "Egg"
     val productPrice = 100.0
     val tags = "egg, eggs, dinosaur"
-    val previewURL = "https://cdn.pixabay.com/photo/2015/12/26/17/08/egg-1108880_150.jpg"
     val commentary = "no comments"
+
+
+    val product_Entity = ProductEntity(
+        id = id,
+        imageUrl = previewURL,
+        amount = 1,
+        description = tags,
+        name = productName,
+        price = productPrice,
+        commentary = commentary
+    )
+
+    val productV1 = Product(
+        id = id,
+        title = productName,
+        quantity = 1,
+        price =productPrice,
+        imageUrl = previewURL,
+        description = tags
+    )
+
+
+
+
+
+
+
+
+
+
+
+
+
+    //-----
 
     val productEntity = ProductEntity(
         id = 1,
@@ -44,4 +79,6 @@ internal object InstrumentedProductTestData{
                     "Lorem Ipsum has been the industry's standard dummy text ever since. " +
                     "When an unknown printer took a galley."
         )
+
+
 }

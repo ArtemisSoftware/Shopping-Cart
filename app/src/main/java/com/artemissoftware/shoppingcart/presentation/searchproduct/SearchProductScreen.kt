@@ -53,6 +53,7 @@ import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.artemissoftware.shoppingcart.PreviewData
 import com.artemissoftware.shoppingcart.R
+import com.artemissoftware.shoppingcart.presentation.searchproduct.TestTags.SEARCH_PRODUCT_BACK_BUTTON
 import com.artemissoftware.shoppingcart.presentation.searchproduct.TestTags.SEARCH_PRODUCT_ERROR
 import com.artemissoftware.shoppingcart.presentation.searchproduct.TestTags.SEARCH_PRODUCT_GRID
 import com.artemissoftware.shoppingcart.presentation.searchproduct.TestTags.SEARCH_PRODUCT_SEARCH_BAR
@@ -119,6 +120,8 @@ private fun SearchProductScreenContent(
                 ),
                 navigationIcon = {
                     IconButton(
+                        modifier = Modifier
+                            .testTag(SEARCH_PRODUCT_BACK_BUTTON),
                         onClick = onPopBackStack
                     ) {
                         Icon(
