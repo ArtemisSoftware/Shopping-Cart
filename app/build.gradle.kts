@@ -18,7 +18,7 @@ android {
         versionCode = 1
         versionName = "1.0"
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = "com.artemissoftware.shoppingcart.test.runner.HiltTestRunner"
         vectorDrawables {
             useSupportLibrary = true
         }
@@ -48,6 +48,10 @@ android {
     }
     ksp {
         arg("room.schemaLocation", "$projectDir/schemas")
+    }
+    sourceSets {
+        // Adds exported schema location as test app assets.
+        getByName("androidTest").assets.srcDir("$projectDir/schemas")
     }
     packaging {
         resources {
@@ -87,16 +91,31 @@ dependencies {
 
     implementation(libs.coil.compose)
 
+    // To create a test module to be used by other modules
+    implementation(libs.okhttp.mockwebserver)
+    implementation(libs.junit.jupiter.api)
+    implementation(libs.kotlinx.coroutines.test)
+    implementation(libs.hilt.android.testing)
+    implementation(libs.espresso.core)
+    implementation(libs.ui.test.junit4)
+
     testImplementation(libs.junit)
     testImplementation(libs.junit.jupiter.api)
     testRuntimeOnly(libs.junit.jupiter.engine)
     testImplementation(libs.junit.jupiter.params)
     testImplementation(libs.assertk)
+    testImplementation(libs.okhttp.mockwebserver)
+    testImplementation(libs.kotlinx.coroutines.test)
+    testImplementation(libs.mockk)
+    testImplementation(libs.turbine)
 
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.espresso.core)
     androidTestImplementation(platform(libs.compose.bom))
     androidTestImplementation(libs.ui.test.junit4)
+    androidTestImplementation(libs.assertk)
+    androidTestImplementation(libs.turbine)
+    androidTestImplementation(libs.room.testing)
     
     debugImplementation(libs.ui.tooling)
     debugImplementation(libs.ui.test.manifest)

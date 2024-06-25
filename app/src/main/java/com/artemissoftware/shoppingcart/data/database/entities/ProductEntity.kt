@@ -14,5 +14,7 @@ data class ProductEntity(
     val price: Double,
     val imageUrl: String,
     @ColumnInfo(name = "comments", defaultValue = "N/A")
-    val commentary: String
+    val commentary: String,
+    @ColumnInfo(name = "sellerId")
+    val sellerId: String? = null
 )

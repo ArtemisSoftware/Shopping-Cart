@@ -25,6 +25,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
@@ -37,6 +38,10 @@ import com.artemissoftware.shoppingcart.PreviewData
 import com.artemissoftware.shoppingcart.R
 import com.artemissoftware.shoppingcart.domain.models.Product
 import com.artemissoftware.shoppingcart.presentation.addproduct.composables.ProductDetail
+import com.artemissoftware.shoppingcart.presentation.details.TestTags.PRODUCT_COMMENTS_COMMENT
+import com.artemissoftware.shoppingcart.presentation.details.TestTags.PRODUCT_COMMENTS_CONTENT
+import com.artemissoftware.shoppingcart.presentation.details.TestTags.PRODUCT_COMMENTS_DESCRIPTION
+import com.artemissoftware.shoppingcart.presentation.details.TestTags.PRODUCT_COMMENTS_SAVE_BUTTON
 import com.artemissoftware.shoppingcart.ui.theme.ShoppingCartTheme
 
 @Composable
@@ -46,7 +51,7 @@ internal fun ProductComments(
     modifier: Modifier = Modifier,
 ) {
     var comment by remember {
-        mutableStateOf("")
+        mutableStateOf(product.comments)
     }
 
     var promoCode by remember {
@@ -55,12 +60,15 @@ internal fun ProductComments(
 
     Column(
         modifier = modifier
+            .testTag(PRODUCT_COMMENTS_CONTENT)
             .padding(12.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp),
     ) {
         Text(
             text = product.description,
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier
+                .testTag(PRODUCT_COMMENTS_DESCRIPTION)
+                .fillMaxWidth(),
             color = Color.Gray
         )
 
@@ -75,6 +83,7 @@ internal fun ProductComments(
             value = comment,
             onValueChange = { comment = it },
             modifier = Modifier
+                .testTag(PRODUCT_COMMENTS_COMMENT)
                 .fillMaxWidth()
                 .height(100.dp)
                 .clip(RoundedCornerShape(8.dp))
@@ -123,7 +132,9 @@ internal fun ProductComments(
             onClick = {
                 onSave(comment, promoCode)
             },
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier
+                .testTag(PRODUCT_COMMENTS_SAVE_BUTTON)
+                .fillMaxWidth(),
         ) {
             Text(
                 text = stringResource(id = R.string.save),

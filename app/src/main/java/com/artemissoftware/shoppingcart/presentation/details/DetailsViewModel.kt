@@ -40,15 +40,22 @@ class DetailsViewModel @Inject constructor(
 
     private fun getProduct(id: Int) = with(_state) {
         viewModelScope.launch {
+            setLoading()
             getProductUseCase(id)
                 .onSuccess { product ->
                     update {
-                        it.copy(product = product)
+                        it.copy(
+                            product = product,
+                            isLoading = false
+                        )
                     }
                 }
                 .onFailure {
-                    _state.update {
-                        it.copy(snackBarState = SnackBarState.Info("Error"))
+                    update {
+                        it.copy(
+                            snackBarState = SnackBarState.Info("Error"),
+                            isLoading = false
+                        )
                     }
                 }
         }
@@ -56,7 +63,7 @@ class DetailsViewModel @Inject constructor(
 
     private fun save(comment: String, promoCode: String) = with(_state.value) {
 
-        validateDetailUseCase(comments = comment, promoCode = promoCode)
+        validateDetailUseCase(comments = comment, promoCode = "11") // TODO: remove promocode
             .onSuccess {
                 product?.let { currentProduct ->
                     currentProduct.promoCode = promoCode
@@ -72,5 +79,11 @@ class DetailsViewModel @Inject constructor(
                     it.copy(snackBarState = SnackBarState.Info("Error"))
                 }
             }
+    }
+
+    private fun setLoading() = with(_state){
+        update {
+            it.copy(isLoading = true)
+        }
     }
 }

@@ -3,7 +3,7 @@ package com.artemissoftware.shoppingcart.data.database.migrations
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
 
-object Migration3To4 {
+object ManualMigration {
     val migration3To4 = object : Migration(3,4) {
         override fun migrate(database: SupportSQLiteDatabase) {
             database.execSQL(
@@ -15,6 +15,9 @@ object Migration3To4 {
                     )
                 """.trimIndent())
         }
-
     }
+
+    val ALL_MIGRATIONS = arrayOf(
+        migration3To4
+    )
 }

@@ -32,6 +32,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
@@ -42,6 +43,7 @@ import com.artemissoftware.shoppingcart.PreviewData
 import com.artemissoftware.shoppingcart.R
 import com.artemissoftware.shoppingcart.presentation.composables.ProductDescription
 import com.artemissoftware.shoppingcart.presentation.addproduct.composables.ProductDetail
+import com.artemissoftware.shoppingcart.presentation.details.TestTags.PRODUCT_DETAIL_ERROR
 import com.artemissoftware.shoppingcart.presentation.details.composables.ProductComments
 import com.artemissoftware.shoppingcart.ui.theme.PrimaryColor
 import com.artemissoftware.shoppingcart.ui.theme.ShoppingCartTheme
@@ -85,7 +87,12 @@ private fun DetailsScreenContent(
     }
 
     Scaffold(
-        snackbarHost = { SnackbarHost(hostState = snackbarHostState) },
+        snackbarHost = {
+            SnackbarHost(
+                modifier = Modifier.testTag(
+                    PRODUCT_DETAIL_ERROR
+                ),
+                hostState = snackbarHostState) },
         topBar = {
             TopAppBar(
                 title = {},
@@ -104,6 +111,19 @@ private fun DetailsScreenContent(
             )
         }
     ) { paddingValues ->
+
+        if(state.isLoading){
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(paddingValues)
+            ) {
+                CircularProgressIndicator(
+                    modifier = Modifier.align(Alignment.Center)
+                )
+            }
+        }
+
         state.product?.let {
             ConstraintLayout(
                 modifier = Modifier
@@ -169,16 +189,6 @@ private fun DetailsScreenContent(
                         event(DetailsEvent.Save(comment = comment, promoCode = promoCode))
                         onPopBackStack()
                     }
-                )
-            }
-        } ?: run {
-            Box(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(paddingValues)
-            ) {
-                CircularProgressIndicator(
-                    modifier = Modifier.align(Alignment.Center)
                 )
             }
         }

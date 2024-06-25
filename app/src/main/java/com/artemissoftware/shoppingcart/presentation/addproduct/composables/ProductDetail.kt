@@ -17,6 +17,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -25,6 +26,12 @@ import androidx.compose.ui.unit.sp
 import com.artemissoftware.shoppingcart.PreviewData
 import com.artemissoftware.shoppingcart.R
 import com.artemissoftware.shoppingcart.domain.models.Product
+import com.artemissoftware.shoppingcart.presentation.addproduct.TestTags.PRODUCT_DETAIL_ADD_BUTTON
+import com.artemissoftware.shoppingcart.presentation.addproduct.TestTags.PRODUCT_DETAIL_BUY_BUTTON
+import com.artemissoftware.shoppingcart.presentation.addproduct.TestTags.PRODUCT_DETAIL_CONTENT
+import com.artemissoftware.shoppingcart.presentation.addproduct.TestTags.PRODUCT_DETAIL_DESCRIPTION
+import com.artemissoftware.shoppingcart.presentation.addproduct.TestTags.PRODUCT_DETAIL_QUANTITY
+import com.artemissoftware.shoppingcart.presentation.addproduct.TestTags.PRODUCT_DETAIL_REMOVE_BUTTON
 import com.artemissoftware.shoppingcart.ui.theme.ShoppingCartTheme
 
 @Composable
@@ -36,13 +43,16 @@ internal fun ProductDetail(
     modifier: Modifier = Modifier,
 ) {
     Column(
-        modifier = modifier,
+        modifier = modifier
+            .testTag(PRODUCT_DETAIL_CONTENT),
         verticalArrangement = Arrangement.spacedBy(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Text(
             text = product.description,
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier
+                .testTag(PRODUCT_DETAIL_DESCRIPTION)
+                .fillMaxWidth(),
             color = Color.Gray
         )
 
@@ -56,7 +66,9 @@ internal fun ProductDetail(
                 Icon(
                     imageVector = Icons.Rounded.Remove,
                     contentDescription = null,
-                    modifier = Modifier.size(45.dp)
+                    modifier = Modifier
+                        .testTag(PRODUCT_DETAIL_REMOVE_BUTTON)
+                        .size(45.dp)
                 )
             }
 
@@ -65,20 +77,25 @@ internal fun ProductDetail(
                 fontSize = 23.sp,
                 color = Color.DarkGray,
                 modifier = Modifier
+                    .testTag(PRODUCT_DETAIL_QUANTITY)
             )
 
             IconButton(onClick = onAddQuantity) {
                 Icon(
                     imageVector = Icons.Rounded.Add,
                     contentDescription = null,
-                    modifier = Modifier.size(45.dp)
+                    modifier = Modifier
+                        .testTag(PRODUCT_DETAIL_ADD_BUTTON)
+                        .size(45.dp)
                 )
             }
         }
 
         Button(
             onClick = onBuyNow,
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier
+                .testTag(PRODUCT_DETAIL_BUY_BUTTON)
+                .fillMaxWidth(),
         ) {
             Text(
                 text = stringResource(id = R.string.buy_now),

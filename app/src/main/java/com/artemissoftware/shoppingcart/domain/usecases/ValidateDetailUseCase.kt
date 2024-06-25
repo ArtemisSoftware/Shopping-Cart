@@ -17,7 +17,7 @@ class ValidateDetailUseCase @Inject constructor() {
         try {
             promoCode.toInt()
         } catch (e: NumberFormatException) {
-            return Resource.Failure(ValidationError.DetailError.InvalidAmount)
+            return Resource.Failure(ValidationError.DetailError.InvalidPromocodeNumber)
         }
 
         return Resource.Success(Unit)

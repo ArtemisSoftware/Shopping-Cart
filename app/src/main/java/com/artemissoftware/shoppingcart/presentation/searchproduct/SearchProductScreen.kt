@@ -15,6 +15,7 @@ import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.lazy.staggeredgrid.LazyVerticalStaggeredGrid
 import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridCells
 import androidx.compose.foundation.lazy.staggeredgrid.items
+import androidx.compose.foundation.lazy.staggeredgrid.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBackIosNew
@@ -43,6 +44,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -51,6 +53,12 @@ import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.artemissoftware.shoppingcart.PreviewData
 import com.artemissoftware.shoppingcart.R
+import com.artemissoftware.shoppingcart.presentation.searchproduct.TestTags.SEARCH_PRODUCT_BACK_BUTTON
+import com.artemissoftware.shoppingcart.presentation.searchproduct.TestTags.SEARCH_PRODUCT_ERROR
+import com.artemissoftware.shoppingcart.presentation.searchproduct.TestTags.SEARCH_PRODUCT_GRID
+import com.artemissoftware.shoppingcart.presentation.searchproduct.TestTags.SEARCH_PRODUCT_SEARCH_BAR
+import com.artemissoftware.shoppingcart.presentation.searchproduct.TestTags.searchProductItemTag
+import com.artemissoftware.shoppingcart.presentation.searchproduct.composables.SearchToolbar
 import com.artemissoftware.shoppingcart.ui.theme.PrimaryColor
 import com.artemissoftware.shoppingcart.ui.theme.ShoppingCartTheme
 import kotlinx.coroutines.launch
@@ -98,7 +106,12 @@ private fun SearchProductScreenContent(
     }
 
     Scaffold(
-        snackbarHost = { SnackbarHost(hostState = snackbarHostState)},
+        snackbarHost = {
+            SnackbarHost(
+                modifier = Modifier
+                    .testTag(SEARCH_PRODUCT_ERROR),
+                hostState = snackbarHostState)
+        },
         topBar = {
             TopAppBar(
                 title = {},
@@ -107,6 +120,8 @@ private fun SearchProductScreenContent(
                 ),
                 navigationIcon = {
                     IconButton(
+                        modifier = Modifier
+                            .testTag(SEARCH_PRODUCT_BACK_BUTTON),
                         onClick = onPopBackStack
                     ) {
                         Icon(
@@ -128,46 +143,35 @@ private fun SearchProductScreenContent(
                 .padding(it)
         ) {
 
-            SearchBar(
-                query = state.searchQuery,
-                onQueryChange = { event(SearchProductEvent.UpdateQuery(it)) }, //update the value of searchText
-                trailingIcon = {
-                    IconButton(
-                        onClick = {
-                            if(state.searchQuery.isNotEmpty()) {
-                                event(SearchProductEvent.Search)
-                                controller?.hide()
-                            }
-                        }
-                    ) {
-                        Icon(
-                            imageVector = Icons.Default.Search,
-                            contentDescription = "",
-                            modifier = Modifier
-                                .size(25.dp),
-                            tint = Color.Black
-                        )
-                    }
-                },
-                onSearch = {
-
-                }, //the callback to be invoked when the input service triggers the ImeAction.Search action
-                active = false, //whether the user is searching or not
-                onActiveChange = {  }, //the callback to be invoked when this search bar's active state is changed
+            SearchToolbar(
+                searchQuery = state.searchQuery,
                 modifier = Modifier
+                    .testTag(SEARCH_PRODUCT_SEARCH_BAR)
                     .fillMaxWidth()
-                    .padding(16.dp)
-            ){}
+                    .padding(16.dp),
+                onBackClick = {},
+                onSearchQueryChanged = {
+                    event(SearchProductEvent.UpdateQuery(it))
+                },
+                onSearchTriggered = {
+                    event(SearchProductEvent.Search)
+                    controller?.hide()
+                },
+            )
 
             LazyVerticalStaggeredGrid(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .testTag(SEARCH_PRODUCT_GRID),
                 columns = StaggeredGridCells.Fixed(2),
                 contentPadding = PaddingValues(12.dp),
                 content = {
-                    items(state.products) { product ->
+                    itemsIndexed(state.products) { index, product ->
                         Card(
                             shape = RoundedCornerShape(12.dp),
                             elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
                             modifier = Modifier
+                                .testTag(searchProductItemTag(index))
                                 .clip(RoundedCornerShape(12.dp))
                                 .clickable {
                                     navigateToAddProduct(product.id)

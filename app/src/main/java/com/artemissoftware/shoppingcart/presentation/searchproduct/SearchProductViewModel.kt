@@ -40,7 +40,10 @@ class SearchProductViewModel @Inject constructor(
                     val snackBarState = if(products.isEmpty()) SnackBarState.Info("No products found") else null
 
                     _state.update {
-                        it.copy(products = products, snackBarState = snackBarState)
+                        it.copy(
+                            products = products,
+                            snackBarState = snackBarState
+                        )
                     }
                 }
                 .onFailure {

@@ -21,10 +21,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.artemissoftware.shoppingcart.PreviewData
+import com.artemissoftware.shoppingcart.presentation.cart.TestTags.CART_ADD_BUTTON
+import com.artemissoftware.shoppingcart.presentation.cart.TestTags.CART_LIST
+import com.artemissoftware.shoppingcart.presentation.cart.TestTags.CART_TOTAL_BAR
 import com.artemissoftware.shoppingcart.presentation.cart.composables.ProductCard
 import com.artemissoftware.shoppingcart.presentation.cart.composables.TotalBar
 import com.artemissoftware.shoppingcart.ui.theme.ShoppingCartTheme
@@ -55,7 +59,10 @@ private fun CartScreenContent(
 
     Scaffold(
         bottomBar = {
-            TotalBar(total = state.cart.total.toString())
+            TotalBar(
+                modifier = Modifier.testTag(CART_TOTAL_BAR),
+                total = state.cart.total.toString()
+            )
         },
         floatingActionButtonPosition = FabPosition.End,
         floatingActionButton = {
@@ -64,6 +71,7 @@ private fun CartScreenContent(
                     onClick = navigateToSearchProduct,
                     shape = CircleShape,
                     modifier = Modifier
+                        .testTag(CART_ADD_BUTTON)
                         .align(Alignment.Center)
                         .size(72.dp)
                         .offset(y = 50.dp)
@@ -79,6 +87,7 @@ private fun CartScreenContent(
     ) {
         LazyColumn(
             modifier = Modifier
+                .testTag(CART_LIST)
                 .fillMaxSize()
                 .padding(it)
                 .padding(horizontal = 12.dp)

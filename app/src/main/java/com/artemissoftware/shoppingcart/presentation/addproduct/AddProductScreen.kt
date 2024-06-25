@@ -33,6 +33,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
@@ -41,6 +42,7 @@ import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.artemissoftware.shoppingcart.PreviewData
 import com.artemissoftware.shoppingcart.R
+import com.artemissoftware.shoppingcart.presentation.addproduct.TestTags.PRODUCT_DETAIL_ERROR
 import com.artemissoftware.shoppingcart.presentation.composables.ProductDescription
 import com.artemissoftware.shoppingcart.presentation.addproduct.composables.ProductDetail
 import com.artemissoftware.shoppingcart.ui.theme.PrimaryColor
@@ -87,7 +89,13 @@ private fun AddProductScreenContent(
     }
 
     Scaffold(
-        snackbarHost = { SnackbarHost(hostState = snackbarHostState) },
+        snackbarHost = {
+            SnackbarHost(
+                modifier = Modifier
+                    .testTag(if(state.snackBarState != null) PRODUCT_DETAIL_ERROR else ""),
+                hostState = snackbarHostState
+            )
+        },
         topBar = {
             TopAppBar(
                 title = {},

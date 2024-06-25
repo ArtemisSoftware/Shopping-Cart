@@ -19,17 +19,25 @@ open class NetworkModule {
 
     protected open fun baseUrl() = PixabayApi.BASE_URL
 
+    protected open fun addInterceptor() = true
+
     @Provides
     @Singleton
     fun provideOkHttpClient(): OkHttpClient {
-        return OkHttpClient.Builder()
+
+        var okHttpClient = OkHttpClient.Builder()
             .addInterceptor(
                 HttpLoggingInterceptor()
                     .setLevel(HttpLoggingInterceptor.Level.BODY),
             )
-            .addInterceptor(ApiKeyInterceptor())
             .readTimeout(15L, TimeUnit.SECONDS)
             .connectTimeout(15L, TimeUnit.SECONDS)
+
+        if(addInterceptor()){
+            okHttpClient = okHttpClient.addInterceptor(ApiKeyInterceptor())
+        }
+
+        return okHttpClient
             .build()
     }
 
