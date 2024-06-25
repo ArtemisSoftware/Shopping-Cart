@@ -7,7 +7,25 @@ androidx-test-ext-junit = "1.1.5"
 espresso-core = "3.5.1"
 lifecycle-runtime-ktx = "2.7.0"
 activity-compose = "1.8.2"
-compose-bom = "2023.03.00"
+compose-bom = "2024.04.01"
+
+material-icons-extended = "1.6.7"
+constraintlayout-compose = "1.0.1"
+navigation-compose = "2.5.0-rc01"
+gson = "2.10"
+retrofit = "2.9.0"
+okhttp = "5.0.0-alpha.11"
+room = "2.4.3"
+com-google-devtools-ksp = "1.8.20-1.0.11"
+hilt = "2.48"
+hilt-navigation-compose = "1.2.0"
+coil-compose = "2.4.0"
+
+# test
+
+junit-jupiter = "5.9.3"
+assertk = "0.26.1"
+de-mannodermaus-android-junit5 = "1.9.3.0"
 
 
 retrofit = "2.9.0"
@@ -42,6 +60,46 @@ ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview
 ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
 ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
 material3 = { group = "androidx.compose.material3", name = "material3" }
+constraintlayout-compose = { group = "androidx.constraintlayout", name = "constraintlayout-compose", version.ref = "constraintlayout-compose" }
+
+material-icons-extended = { group = "androidx.compose.material", name = "material-icons-extended", version.ref = "material-icons-extended" }
+
+navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "navigation-compose" }
+gson = { group = "com.google.code.gson", name = "gson", version.ref = "gson" }
+
+# Retrofit
+
+retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
+converter-moshi = { group = "com.squareup.retrofit2", name = "converter-moshi", version.ref = "retrofit" }
+
+# okhttp
+
+okhttp-logging-interceptor = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okhttp" }
+
+#Room
+
+room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room"  }
+room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room"  }
+room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room"  }
+
+# Dagger Hilt
+
+hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
+hilt-android-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "hilt" }
+hilt-navigation-compose = { group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "hilt-navigation-compose" }
+
+# Coil
+
+coil-compose = { group = "io.coil-kt", name = "coil-compose", version.ref = "coil-compose" }
+
+# Tests
+
+junit-jupiter-api = { group = "org.junit.jupiter", name = "junit-jupiter-api", version.ref = "junit-jupiter" }
+junit-jupiter-engine = { group = "org.junit.jupiter", name = "junit-jupiter-engine", version.ref = "junit-jupiter" }
+junit-jupiter-params = { group = "org.junit.jupiter", name = "junit-jupiter-params", version.ref = "junit-jupiter" }
+
+assertk = { group = "com.willowtreeapps.assertk", name = "assertk", version.ref = "assertk" }
+
 
 navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "navigation-compose" }
 gson = { group = "com.google.code.gson", name = "gson", version.ref = "gson" }
@@ -97,6 +155,15 @@ com-google-dagger-hilt-android = { id = "com.google.dagger.hilt.android", versio
 # test
 
 de-mannodermaus-android-junit5 = { id = "de.mannodermaus.android-junit5", version.ref = "de-mannodermaus-android-junit5" }
+
+com-google-devtools-ksp = { id = "com.google.devtools.ksp", version.ref = "com-google-devtools-ksp" }
+
+com-google-dagger-hilt-android = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
+
+# Tests
+
+de-mannodermaus-android-junit5 = { id = "de.mannodermaus.android-junit5", version.ref = "de-mannodermaus-android-junit5" }
+
 
 [bundles]
 

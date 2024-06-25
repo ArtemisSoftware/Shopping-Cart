@@ -10,7 +10,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.artemissoftware.shoppingcart.presentation.additem.AddItemScreen
+import androidx.navigation.compose.rememberNavController
+import com.artemissoftware.shoppingcart.presentation.navigation.RootNavGraph
+import com.artemissoftware.shoppingcart.presentation.navigation.Route
 import com.artemissoftware.shoppingcart.ui.theme.ShoppingCartTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -21,12 +23,11 @@ class MainActivity : ComponentActivity() {
         setContent {
             ShoppingCartTheme {
                 // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background,
-                ) {
-                    AddItemScreen()
-                }
+
+                RootNavGraph(
+                    navController = rememberNavController(),
+                    startDestination = Route.Cart.getFullRoute(),
+                )
             }
         }
     }

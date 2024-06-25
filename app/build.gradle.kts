@@ -3,8 +3,8 @@ plugins {
     alias(libs.plugins.com.android.application)
     alias(libs.plugins.org.jetbrains.kotlin.android)
     alias(libs.plugins.com.google.devtools.ksp)
-    alias(libs.plugins.de.mannodermaus.android.junit5)
     alias(libs.plugins.com.google.dagger.hilt.android)
+    alias(libs.plugins.de.mannodermaus.android.junit5)
 }
 
 android {
@@ -18,7 +18,7 @@ android {
         versionCode = 1
         versionName = "1.0"
 
-        testInstrumentationRunner = "com.artemissoftware.shoppingcart.HiltTestRunner"
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
             useSupportLibrary = true
         }
@@ -46,6 +46,9 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion = "1.4.6"
     }
+    ksp {
+        arg("room.schemaLocation", "$projectDir/schemas")
+    }
     packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
@@ -63,12 +66,15 @@ dependencies {
     implementation(libs.ui.graphics)
     implementation(libs.ui.tooling.preview)
     implementation(libs.material3)
+
     implementation(libs.navigation.compose)
-
     implementation(libs.gson)
+    implementation(libs.material.icons.extended)
+    implementation(libs.constraintlayout.compose)
 
+    implementation(libs.retrofit)
     implementation(libs.converter.moshi)
-    implementation(libs.coil.compose)
+    implementation(libs.okhttp.logging.interceptor)
 
     implementation(libs.room.runtime)
     implementation(libs.room.ktx)
@@ -76,29 +82,22 @@ dependencies {
     ksp(libs.room.compiler)
 
     implementation(libs.hilt.android)
-    ksp(libs.hilt.android.compiler)
     implementation(libs.hilt.navigation.compose)
+    ksp(libs.hilt.android.compiler)
+
+    implementation(libs.coil.compose)
 
     testImplementation(libs.junit)
     testImplementation(libs.junit.jupiter.api)
     testRuntimeOnly(libs.junit.jupiter.engine)
     testImplementation(libs.junit.jupiter.params)
     testImplementation(libs.assertk)
-    testImplementation(libs.mockk)
-    testImplementation(libs.kotlinx.coroutines.test)
 
-    androidTestImplementation(libs.junit.jupiter.api)
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.espresso.core)
     androidTestImplementation(platform(libs.compose.bom))
     androidTestImplementation(libs.ui.test.junit4)
-    androidTestImplementation(libs.ui.test.junit4)
-    androidTestImplementation(libs.turbine)
-    androidTestImplementation(libs.core.testing)
-    androidTestImplementation(libs.assertk)
-    androidTestImplementation(libs.hilt.android.testing)
-    kspAndroidTest(libs.hilt.android.compiler)
-
+    
     debugImplementation(libs.ui.tooling)
     debugImplementation(libs.ui.test.manifest)
 }
