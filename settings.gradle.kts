@@ -16,3 +16,4 @@ dependencyResolutionManagement {
 rootProject.name = "ShoppingCart"
 include(":app")
 include(":core:network")
+include(":core:test")
