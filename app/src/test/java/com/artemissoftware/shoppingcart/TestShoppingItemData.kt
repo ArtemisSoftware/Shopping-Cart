@@ -1,6 +1,5 @@
 package com.artemissoftware.shoppingcart
 
-import com.artemissoftware.shoppingcart.data.database.ShoppingItemEntity
 import com.artemissoftware.shoppingcart.domain.models.ShoppingItem
 
 object TestShoppingItemData {
