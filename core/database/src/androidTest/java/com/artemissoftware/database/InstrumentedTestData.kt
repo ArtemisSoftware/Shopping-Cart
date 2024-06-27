@@ -20,4 +20,16 @@ internal object InstrumentedTestData {
         price = productPrice,
         commentary = commentary
     )
+
+    val productEntity2 = ProductEntity(
+        id = 2,
+        imageUrl = previewURL,
+        amount = 1,
+        description = tags,
+        name = productName.capitalize(),
+        price = productPrice,
+        commentary = "no comments"
+    )
+
+    val productEntities = listOf(productEntity, productEntity2)
 }
