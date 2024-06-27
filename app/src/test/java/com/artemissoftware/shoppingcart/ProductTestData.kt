@@ -9,9 +9,11 @@ import java.util.Locale
 internal object ProductTestData{
 
     val productName = "my product"
-    val productPrice = 100.0
+    private val likes = 119
+    val productPrice = likes.toDouble()
     val tags = "egg, eggs, dinosaur"
     val previewURL = "https://cdn.pixabay.com/photo/2015/12/26/17/08/egg-1108880_150.jpg"
+    val comments = "my comment"
 
     val hitDto = HitDto(
         id = 1108880,
@@ -30,7 +32,7 @@ internal object ProductTestData{
         imageSize = 714497,
         views = 30047,
         downloads = 18841,
-        likes = 119,
+        likes = likes,
         comments = 7,
         userId = 901738,
         user = "Viergacht",
@@ -51,7 +53,7 @@ internal object ProductTestData{
         description = tags,
         name = productName.capitalize(),
         price = productPrice,
-        commentary = "my comment"
+        commentary = comments
     )
 
     fun getProduct(
@@ -59,7 +61,8 @@ internal object ProductTestData{
         name: String? = null,
         tagList: String = tags,
         price: Double = productPrice,
-        quantity: Int = 1
+        quantity: Int = 1,
+        commentary: String = ""
     ): Product{
         return Product(
             id = id,
@@ -72,6 +75,7 @@ internal object ProductTestData{
             quantity = quantity,
             price = price,
             description = tagList,
+            comments = commentary,
         )
     }
 

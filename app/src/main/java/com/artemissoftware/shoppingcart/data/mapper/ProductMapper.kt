@@ -3,10 +3,9 @@ package com.artemissoftware.shoppingcart.data.mapper
 import com.artemissoftware.shoppingcart.data.database.entities.ProductEntity
 import com.artemissoftware.shoppingcart.data.network.dto.HitDto
 import com.artemissoftware.shoppingcart.domain.models.Product
-import com.artemissoftware.shoppingcart.data.util.PriceUtil
 import java.util.Locale
 
-internal fun HitDto.toProduct(name: String? = null, price: Double = PriceUtil.generateRandomPrice(minPrice = 10.0, maxPrice = 100.0)): Product{
+internal fun HitDto.toProduct(name: String? = null): Product{
     return Product(
         id = id,
         title = (name ?: tags.split(",")[0]).replaceFirstChar {
@@ -16,16 +15,16 @@ internal fun HitDto.toProduct(name: String? = null, price: Double = PriceUtil.ge
         },
         imageUrl = previewURL,
         quantity = 1,
-        price = price,
+        price = likes.toDouble(),
         description = tags,
     )
 }
 
-internal fun List<HitDto>.toProduct(name: String? = null, price: Double = PriceUtil.generateRandomPrice(minPrice = 10.0, maxPrice = 100.0)): Product? {
+internal fun List<HitDto>.toProduct(name: String? = null): Product? {
     if(this.isEmpty())
         return null
 
-    return this.first().toProduct(name = name, price = price)
+    return this.first().toProduct(name = name)
 }
 
 internal fun Product.toEntity(): ProductEntity{
