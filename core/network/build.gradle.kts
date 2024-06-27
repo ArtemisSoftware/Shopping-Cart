@@ -38,6 +38,8 @@ android {
 
 dependencies {
 
+    implementation(project(":core:test"))
+
     implementation(libs.core.ktx)
     implementation(libs.retrofit)
     implementation(libs.converter.moshi)
@@ -52,6 +54,7 @@ dependencies {
     testImplementation(libs.junit.jupiter.params)
     testImplementation(libs.assertk)
     testImplementation(libs.kotlinx.coroutines.test)
+    testImplementation(libs.okhttp.mockwebserver)
 
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.espresso.core)
