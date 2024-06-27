@@ -14,7 +14,7 @@ android {
     defaultConfig {
         minSdk = 33
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = "com.artemissoftware.testing.runner.HiltTestRunner"
         consumerProguardFiles("consumer-rules.pro")
     }
 
@@ -34,11 +34,18 @@ android {
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_17.toString()
     }
+    ksp {
+        arg("room.schemaLocation", "$projectDir/schemas")
+    }
+    sourceSets {
+        // Adds exported schema location as test app assets.
+        getByName("androidTest").assets.srcDir("$projectDir/schemas")
+    }
 }
 
 dependencies {
 
-    implementation(project(":core:test"))
+    implementation(project(":core:testing"))
 
     implementation(libs.core.ktx)
 
@@ -60,4 +67,8 @@ dependencies {
 
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.espresso.core)
+    androidTestImplementation(libs.hilt.android.testing)
+    androidTestImplementation(libs.room.testing)
+    androidTestImplementation(libs.assertk)
+    androidTestImplementation(libs.turbine)
 }
