@@ -20,6 +20,7 @@
             <option value="$PROJECT_DIR$/core/testing" />
             <option value="$PROJECT_DIR$/features" />
             <option value="$PROJECT_DIR$/features/cart" />
+            <option value="$PROJECT_DIR$/features/product" />
           </set>
         </option>
         <option name="resolveExternalAnnotations" value="false" />
