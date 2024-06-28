@@ -1,8 +1,6 @@
-package com.artemissoftware.product
+package com.artemissoftware.presentation.composables
 
 import com.artemissoftware.models.Product
-import com.artemissoftware.product.searchproduct.SearchProductState
-import com.artemissoftware.product.addproduct.AddProductState
 
 internal object PreviewData {
 
@@ -18,12 +16,4 @@ internal object PreviewData {
                     "Lorem Ipsum has been the industry's standard dummy text ever since. " +
                     "When an unknown printer took a galley."
         )
-
-//    val cart = Cart(listOf(product, product), 20.0)
-//
-//    val cartState = CartState(cart = cart)
-    val addProductState = AddProductState(product = product)
-    val searchProductState = SearchProductState(products = listOf(product, product),  searchQuery = "query")
-
-//    val detailsState = DetailsState(product = product)
 }

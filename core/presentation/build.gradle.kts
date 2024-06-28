@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "com.artemissoftware.test"
+    namespace = "com.artemissoftware.presentation"
     compileSdk = 34
 
     defaultConfig {
@@ -31,19 +31,32 @@ android {
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_17.toString()
     }
+    buildFeatures {
+        compose = true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.4.6"
+    }
 }
 
 dependencies {
 
+    implementation(project(":core:ui"))
     implementation(project(":core:models"))
-    implementation(project(":core:domain"))
 
     implementation(libs.core.ktx)
-    implementation(libs.kotlinx.coroutines.core)
+    implementation(libs.lifecycle.runtime.ktx)
+    implementation(libs.activity.compose)
+    implementation(platform(libs.compose.bom))
+    implementation(libs.ui)
+    implementation(libs.ui.graphics)
+    implementation(libs.ui.tooling.preview)
+    implementation(libs.material3)
 
-    implementation(libs.okhttp.mockwebserver)
-
-    testImplementation(libs.junit)
+    androidTestImplementation(libs.ui.test.junit4)
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.espresso.core)
+
+    debugImplementation(libs.ui.tooling)
+    debugImplementation(libs.ui.test.manifest)
 }

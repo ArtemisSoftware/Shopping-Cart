@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.org.jetbrains.kotlin.android)
     alias(libs.plugins.com.google.devtools.ksp)
     alias(libs.plugins.com.google.dagger.hilt.android)
+    alias(libs.plugins.de.mannodermaus.android.junit5)
 }
 
 android {
@@ -13,7 +14,7 @@ android {
     defaultConfig {
         minSdk = 33
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = "com.artemissoftware.testing.runner.HiltTestRunner"
         consumerProguardFiles("consumer-rules.pro")
     }
 
@@ -39,6 +40,9 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion = "1.4.6"
     }
+    packagingOptions {
+        resources.excludes.add("META-INF/*")
+    }
 }
 
 dependencies {
@@ -46,8 +50,11 @@ dependencies {
     implementation(project(":core:models"))
     implementation(project(":core:domain"))
     implementation(project(":core:ui"))
-    implementation(project(":core:testing"))
-    testImplementation(project(":core:domain", "test"))
+    implementation(project(":core:presentation"))
+    testImplementation(project(":core:testing"))
+    testImplementation(project(":features:test"))
+    androidTestImplementation(project(":features:test"))
+    androidTestImplementation(project(":core:testing"))
 
     implementation(libs.core.ktx)
     implementation(libs.lifecycle.runtime.ktx)
@@ -57,6 +64,7 @@ dependencies {
     implementation(libs.ui.graphics)
     implementation(libs.ui.tooling.preview)
     implementation(libs.material3)
+    implementation(libs.constraintlayout.compose)
 
     implementation(libs.hilt.android)
     implementation(libs.hilt.navigation.compose)
@@ -73,6 +81,10 @@ dependencies {
     testImplementation(libs.assertk)
     testImplementation(libs.kotlinx.coroutines.test)
 
+    androidTestImplementation(libs.ui.test.junit4)
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.espresso.core)
+
+    debugImplementation(libs.ui.tooling)
+    debugImplementation(libs.ui.test.manifest)
 }

@@ -8,6 +8,7 @@ import com.artemissoftware.domain.error.DataError
 import com.artemissoftware.domain.usecases.SearchProductsUseCase
 import com.artemissoftware.models.SnackBarState
 import com.artemissoftware.product.ProductTestData
+import com.artemissoftware.test.repository.fakes.FakeCartRepository
 import com.artemissoftware.testing.util.extensions.MainCoroutineExtension
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.advanceUntilIdle
