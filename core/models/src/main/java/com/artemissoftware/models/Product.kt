@@ -1,8 +1,5 @@
 package com.artemissoftware.models
 
-import androidx.annotation.DrawableRes
-import com.artemissoftware.shoppingcart.R
-
 data class Product(
     val id: Int,
     val title: String,
