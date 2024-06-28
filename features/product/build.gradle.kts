@@ -46,6 +46,8 @@ dependencies {
     implementation(project(":core:models"))
     implementation(project(":core:domain"))
     implementation(project(":core:ui"))
+    implementation(project(":core:testing"))
+    testImplementation(project(":core:domain", "test"))
 
     implementation(libs.core.ktx)
     implementation(libs.lifecycle.runtime.ktx)
@@ -65,6 +67,11 @@ dependencies {
     implementation(libs.material.icons.extended)
 
     testImplementation(libs.junit)
+    testImplementation(libs.junit.jupiter.api)
+    testRuntimeOnly(libs.junit.jupiter.engine)
+    testImplementation(libs.junit.jupiter.params)
+    testImplementation(libs.assertk)
+    testImplementation(libs.kotlinx.coroutines.test)
 
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.espresso.core)

@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">ShoppingCart</string>
+    <string name="total_cost">"Total cost: "</string>
+    <string name="qty">"Qty: "</string>
+    <string name="buy_now">Buy now</string>
+    <string name="name">Name</string>
+    <string name="price">Price</string>
+    <string name="save">Save</string>
+    <string name="promo_code">Promo code</string>
+    <string name="summer">SUM</string>
+    <string name="comments">Comments</string>
+</resources>

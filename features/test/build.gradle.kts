@@ -2,12 +2,10 @@
 plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.org.jetbrains.kotlin.android)
-    alias(libs.plugins.com.google.devtools.ksp)
-    alias(libs.plugins.com.google.dagger.hilt.android)
 }
 
 android {
-    namespace = "com.artemissoftware.testing"
+    namespace = "com.artemissoftware.test"
     compileSdk = 34
 
     defaultConfig {
@@ -37,22 +35,13 @@ android {
 
 dependencies {
 
+
+    implementation(project(":core:domain"))
+
     implementation(libs.core.ktx)
-
-    implementation(libs.hilt.android)
-    ksp(libs.hilt.android.compiler)
-
-    implementation(libs.hilt.android.testing)
-
-    implementation(libs.junit.jupiter.api)
-    implementation(libs.kotlinx.coroutines.test)
-    implementation(libs.hilt.android.testing)
-    implementation(libs.espresso.core)
-    implementation(libs.ui.test.junit4)
-
+    implementation(libs.androidx.appcompat)
+    implementation(libs.material)
     testImplementation(libs.junit)
-
-
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.espresso.core)
 }

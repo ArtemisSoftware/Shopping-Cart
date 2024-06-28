@@ -41,16 +41,16 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
-import com.artemissoftware.shoppingcart.PreviewData
-import com.artemissoftware.shoppingcart.R
+import com.artemissoftware.product.PreviewData
 import com.artemissoftware.product.searchproduct.TestTags.SEARCH_PRODUCT_BACK_BUTTON
 import com.artemissoftware.product.searchproduct.TestTags.SEARCH_PRODUCT_ERROR
 import com.artemissoftware.product.searchproduct.TestTags.SEARCH_PRODUCT_GRID
 import com.artemissoftware.product.searchproduct.TestTags.SEARCH_PRODUCT_SEARCH_BAR
 import com.artemissoftware.product.searchproduct.TestTags.searchProductItemTag
 import com.artemissoftware.product.searchproduct.composables.SearchToolbar
-import com.artemissoftware.shoppingcart.ui.theme.PrimaryColor
-import com.artemissoftware.shoppingcart.ui.theme.ShoppingCartTheme
+import com.artemissoftware.ui.R
+import com.artemissoftware.ui.theme.PrimaryColor
+import com.artemissoftware.ui.theme.ShoppingCartTheme
 import kotlinx.coroutines.launch
 
 @Composable
