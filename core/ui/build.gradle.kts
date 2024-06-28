@@ -2,12 +2,10 @@
 plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.org.jetbrains.kotlin.android)
-    alias(libs.plugins.com.google.devtools.ksp)
-    alias(libs.plugins.com.google.dagger.hilt.android)
 }
 
 android {
-    namespace = "com.artemissoftware.product"
+    namespace = "com.artemissoftware.ui"
     compileSdk = 34
 
     defaultConfig {
@@ -43,10 +41,6 @@ android {
 
 dependencies {
 
-    implementation(project(":core:models"))
-    implementation(project(":core:domain"))
-    implementation(project(":core:ui"))
-
     implementation(libs.core.ktx)
     implementation(libs.lifecycle.runtime.ktx)
     implementation(libs.activity.compose)
@@ -55,14 +49,6 @@ dependencies {
     implementation(libs.ui.graphics)
     implementation(libs.ui.tooling.preview)
     implementation(libs.material3)
-
-    implementation(libs.hilt.android)
-    implementation(libs.hilt.navigation.compose)
-    ksp(libs.hilt.android.compiler)
-
-    implementation(libs.coil.compose)
-
-    implementation(libs.material.icons.extended)
 
     testImplementation(libs.junit)
 
